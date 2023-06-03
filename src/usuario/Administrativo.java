@@ -1,5 +1,7 @@
 package usuario;
 
+import java.time.LocalDate;
+
 public class Administrativo extends Usuario {
     private String area;
     private String experienciaPrevia;
@@ -7,7 +9,7 @@ public class Administrativo extends Usuario {
     public Administrativo() {
     }
 
-    public Administrativo(String nombreCompleto, String fechaNacimiento, int run, String area, String experienciaPrevia) {
+    public Administrativo(String nombreCompleto, LocalDate fechaNacimiento, int run, String area, String experienciaPrevia) {
         super(nombreCompleto, fechaNacimiento, run);
         this.area = area;
         this.experienciaPrevia = experienciaPrevia;
