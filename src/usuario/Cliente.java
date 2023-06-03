@@ -14,9 +14,10 @@ public class Cliente extends Usuario {
     private String comuna;
     private int edad;
 
-    public Cliente(){
+   public Cliente (){
 
-    }
+
+   }
 
 
     public Cliente(String nombre, LocalDate fechaNacimiento, int run, String apellidos, String telefono, String afp, SistemaSalud sistemaSalud, String direccion, String comuna, int edad) {

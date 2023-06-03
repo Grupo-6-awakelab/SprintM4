@@ -1,5 +1,7 @@
 package usuario;
 
+import java.time.LocalDate;
+
 public class Profesional extends Usuario {
     private String titulo;
     private String fechaIngreso;
@@ -7,7 +9,7 @@ public class Profesional extends Usuario {
     public Profesional(){
     }
 
-    public Profesional(String nombreCompleto, String fechaNacimiento, int run, String titulo, String fechaIngreso) {
+    public Profesional(String nombreCompleto, LocalDate fechaNacimiento, int run, String titulo, String fechaIngreso) {
         super(nombreCompleto, fechaNacimiento, run);
         this.titulo = titulo;
         this.fechaIngreso = fechaIngreso;

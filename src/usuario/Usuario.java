@@ -13,6 +13,7 @@ public class Usuario implements IAsesoria {
     public Usuario(){
 
     }
+
     public Usuario(String nombre, LocalDate fechaNacimiento, int run) {
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
