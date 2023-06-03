@@ -43,6 +43,8 @@ public class Usuario implements IAsesoria {
     public void setRun(int run) {
         this.run = run;
     }
+
+
     public void obtenerEdad() {
         int edad = LocalDate.now().getYear() - fechaNacimiento.getYear();
         System.out.println( "El usuario " + nombre + " tiene " + edad + " años");;

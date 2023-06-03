@@ -9,8 +9,23 @@ public class Main {
     public static void main(String[] args) {
 
         Cliente cliente = new Cliente("Kevin", LocalDate.now(),
-                123123, "Apellido", "123123",
-                "asdasd", SistemaSalud.Fonasa,"asdasd","asdasd",12);
+                1111, "Apellido", "123123",
+                "asdasd", SistemaSalud.Isapre,"asdasd","asdasd",12);
+        Cliente cliente2 = new Cliente("Kevin1", LocalDate.now(),
+                2222, "Apellido", "123123",
+                "asdasd", SistemaSalud.Isapre,"asdasd","asdasd",12);
 
-        }
+
+
+        Contenedor contenedor = new Contenedor();
+        contenedor.almacenarCliente(cliente);
+        contenedor.almacenarCliente(cliente2);
+        contenedor.analizarUsuario();
+
+        contenedor.eliminarUsuario();
+
+        contenedor.analizarUsuario();
+
+    }
+
     }

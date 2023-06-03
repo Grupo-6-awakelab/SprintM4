@@ -82,14 +82,23 @@ public class Cliente extends Usuario {
     public String obtenerNombre() {
         return getNombre() + "" + apellidos;
     }
+
+    public SistemaSalud getSistemaSalud() {
+        return sistemaSalud;
+    }
+
+    public void setSistemaSalud(SistemaSalud sistemaSalud) {
+        this.sistemaSalud = sistemaSalud;
+    }
+
     public String obtenerSistemaDeSalud(){
 
         switch (sistemaSalud.ordinal() + 1) {
             case 1:
-                return "Su sistema de salud es Fonasa";
+                return "Fonasa";
 
             case 2:
-               return "Su sistema de salud es Isapre";
+               return "Isapre";
 
             default:
 
@@ -98,15 +107,13 @@ public class Cliente extends Usuario {
         }
 
 
-
-
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Cliente{");
-
-        sb.append(", apellidos='").append(apellidos).append('\'');
-        sb.append("telefono='").append(telefono).append('\'');
+        sb.append("apellidos='").append(apellidos).append('\'');
+        sb.append(", telefono='").append(telefono).append('\'');
         sb.append(", afp='").append(afp).append('\'');
+        sb.append(", sistemaSalud=").append(sistemaSalud);
         sb.append(", direccion='").append(direccion).append('\'');
         sb.append(", comuna='").append(comuna).append('\'');
         sb.append(", edad=").append(edad);
