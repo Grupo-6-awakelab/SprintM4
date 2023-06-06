@@ -1,15 +1,13 @@
 package capacitacion;
 
 import usuario.Cliente;
-import usuario.Usuario;
 
 
 public class Capacitacion {
     private int id;
     private Cliente cliente;
-
     //Testear despues.
-
+    private int runCliente = cliente.getRun();
     private String dia;
 
     private String hora;
@@ -21,9 +19,9 @@ public class Capacitacion {
 
     }
 
-    public Capacitacion(int id, Cliente cliente, String dia, String hora, String lugar, String duracion, int cantidadAsistentes) {
+    public Capacitacion(int id, int runCliente, String dia, String hora, String lugar, String duracion, int cantidadAsistentes) {
         this.id = id;
-        this.cliente = cliente;
+        this.runCliente = runCliente;
         this.dia = dia;
         this.hora = hora;
         this.lugar = lugar;
@@ -47,7 +45,9 @@ public class Capacitacion {
         this.cliente = cliente;
     }
 
-
+    public int getRunCliente() {
+        return runCliente;
+    }
 
 
 
@@ -91,12 +91,11 @@ public class Capacitacion {
         this.cantidadAsistentes = cantidadAsistentes;
     }
 
-
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Capacitacion{");
         sb.append("id=").append(id);
-        sb.append(", runCliente=").append(cliente.getRun());
+        sb.append(", runCliente=").append(runCliente);
         sb.append(", dia='").append(dia).append('\'');
         sb.append(", hora='").append(hora).append('\'');
         sb.append(", lugar='").append(lugar).append('\'');
@@ -105,8 +104,5 @@ public class Capacitacion {
         sb.append('}');
         return sb.toString();
     }
-
-
-
 }
 

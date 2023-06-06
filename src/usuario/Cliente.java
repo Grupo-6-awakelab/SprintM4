@@ -8,16 +8,16 @@ public class Cliente extends Usuario {
     private String afp;
 
 
-    private SistemaSalud sistemaSalud;
+  private SistemaSalud sistemaSalud;
 
     private String direccion;
     private String comuna;
     private int edad;
 
-    public Cliente (){
+   public Cliente (){
 
 
-    }
+   }
 
 
     public Cliente(String nombre, LocalDate fechaNacimiento, int run, String apellidos, String telefono, String afp, SistemaSalud sistemaSalud, String direccion, String comuna, int edad) {
@@ -98,24 +98,18 @@ public class Cliente extends Usuario {
                 return "Fonasa";
 
             case 2:
-                return "Isapre";
+               return "Isapre";
 
             default:
 
+            }
+            return null;
         }
-        return null;
-    }
 
-    @Override
-    public void analizarUsuario() {
-        super.analizarUsuario();
-
-    }
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Cliente{");
-        sb.append("run='").append(getRun()).append('\'');
         sb.append("apellidos='").append(apellidos).append('\'');
         sb.append(", telefono='").append(telefono).append('\'');
         sb.append(", afp='").append(afp).append('\'');
