@@ -17,6 +17,7 @@ public class Main {
 
 
 
+
         Contenedor contenedor = new Contenedor();
         contenedor.almacenarCliente(cliente);
         contenedor.almacenarCliente(cliente2);
