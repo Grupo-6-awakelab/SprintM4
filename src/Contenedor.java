@@ -3,6 +3,8 @@ import capacitacion.IAsesoria;
 import usuario.*;
 
 import javax.swing.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -18,11 +20,121 @@ public class Contenedor {
         capacitaciones = new ArrayList<>();
     }
 
-    public void almacenarUsuario(IAsesoria usuario) {
-        usuarios.add(usuario);
-    }
 
-    public void agregarUsuario(){
+//    public void almacenarUsuario(){
+//        System.out.println("================================================================");
+//        System.out.println("1. Cliente");
+//        System.out.println("2. Profesional");
+//        System.out.println("3. Administrativo");
+//        System.out.println("================================================================");
+//        Scanner scanner = new Scanner(System.in);
+//        int op = scanner.nextInt();
+//        scanner.nextLine();
+//        String nombre;
+//        String apellidos;
+//        int run;
+//        String fecha;
+//        String telefono;
+//        String afp;
+//        String sistema;
+//        String direccion;
+//        String comuna;
+//        int edad;
+//        String titulo;
+//        String fechaIngreso;
+//        String area;
+//        String experienciaPrevia;
+//        LocalDate fechaNacimiento;
+//        DateTimeFormatter fechaFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//        /**
+//         * para agregar
+//         */
+//
+//        switch(op){
+//            case 1:
+//                System.out.println("Escriba su nombre:");
+//                nombre = scanner.nextLine();
+//
+//                System.out.println("Escriba su apellidos:");
+//                apellidos = scanner.nextLine();
+//
+//                System.out.println("Escriba su run:");
+//                run = scanner.nextInt();
+//                scanner.nextLine(); // Agrega esta línea para consumir el salto de línea después de leer el entero
+//
+//                System.out.println("Escriba su fecha de nacimiento (DD/MM/AAAA):");
+//                fecha = scanner.nextLine();
+//                fechaNacimiento = LocalDate.parse(fecha, fechaFormatter);
+//
+//                System.out.println("Escriba su telefono:");
+//                telefono = scanner.nextLine();
+//
+//                System.out.println("Escriba su afp:");
+//                afp = scanner.nextLine();
+//
+//                System.out.println("Escriba su sistema de salud (Fonasa o Isapre):");
+//                sistema = scanner.nextLine();
+//                SistemaSalud sistemaSalud = SistemaSalud.valueOf(sistema.toUpperCase());
+//
+//                System.out.println("Escriba su direccion:");
+//                direccion = scanner.nextLine();
+//
+//                System.out.println("Escriba su comuna:");
+//                comuna = scanner.nextLine();
+//
+//                System.out.println("Escriba su edad:");
+//                edad = scanner.nextInt();
+//
+//                Cliente cliente = new Cliente(nombre,fechaNacimiento,run,apellidos,telefono,afp,sistemaSalud,direccion,comuna,edad);
+//                usuarios.add(cliente);
+//                cliente.analizarUsuario();
+//                break;
+//            case 2:
+//                System.out.println("Escriba su nombre:");
+//                nombre = scanner.nextLine();
+//
+//                System.out.println("Escriba su run:");
+//                run = scanner.nextInt();
+//                scanner.nextLine(); // Agrega esta línea para consumir el salto de línea después de leer el entero
+//
+//                System.out.println("Escriba su fecha de nacimiento (DD/MM/AAAA):");
+//                fecha = scanner.nextLine();
+//                fechaNacimiento = LocalDate.parse(fecha, fechaFormatter);
+//
+//                System.out.println("Escriba su titulo");
+//                titulo = scanner.nextLine();
+//
+//                System.out.println("Escriba su fecha de ingreso:");
+//                fechaIngreso = scanner.nextLine();
+//
+//
+//                Profesional profesional = new Profesional(nombre, fechaNacimiento, run,titulo, fechaIngreso);
+//                usuarios.add(profesional);
+//                profesional.analizarUsuario();
+//
+//                break;
+//            case 3:
+//               System.out.println("Escriba su nombre:");
+//                nombre = scanner.nextLine();
+//                System.out.println("Escriba su fecha de nacimiento (DD/MM/AAAA):");
+//                fecha = scanner.nextLine();
+//                fechaNacimiento = LocalDate.parse(fecha, fechaFormatter);
+//                System.out.println("Escriba su run:");
+//                run = scanner.nextInt();
+//                scanner.nextLine();
+//                System.out.println("Ingrese su area: ");
+//                area = scanner.next();
+//                System.out.println("Ingrese su experiencia:");
+//                experienciaPrevia = scanner.nextLine();
+//                Administrativo administrativo = new Administrativo(nombre, fechaNacimiento, run, area, experienciaPrevia);
+//                usuarios.add(administrativo);
+//                administrativo.analizarUsuario();
+//                break;
+//
+//        }
+//    }
+
+    public void almacenarUsuario() {
         System.out.println("================================================================");
         System.out.println("1. Cliente");
         System.out.println("2. Profesional");
@@ -31,115 +143,103 @@ public class Contenedor {
         Scanner scanner = new Scanner(System.in);
         int op = scanner.nextInt();
         scanner.nextLine();
-        String nombre;
-        String apellidos;
-        int run;
-        String fecha;
-        String telefono;
-        String afp;
-        String sistema;
-        String direccion;
-        String comuna;
-        int edad;
-        String titulo;
-        String fechaIngreso;
-        String area;
-        String experienciaPrevia;
-        LocalDate fechaNacimiento;
-        DateTimeFormatter fechaFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        /**
-         * para agregar
-         */
 
-        switch(op){
+        Usuario usuario = crearUsuario(op, scanner);
+
+        if (usuario != null) {
+            usuario.solicitarDatos(scanner);
+            usuarios.add(usuario);
+            usuario.analizarUsuario();
+        } else {
+            System.out.println("Opción no válida");
+        }
+    }
+
+    public String obtenerNombreClase(int op) {
+        switch (op) {
             case 1:
-                System.out.println("Escriba su nombre:");
-                nombre = scanner.nextLine();
-
-                System.out.println("Escriba su apellidos:");
-                apellidos = scanner.nextLine();
-
-                System.out.println("Escriba su run:");
-                run = scanner.nextInt();
-                scanner.nextLine(); // Agrega esta línea para consumir el salto de línea después de leer el entero
-
-                System.out.println("Escriba su fecha de nacimiento (DD/MM/AAAA):");
-                fecha = scanner.nextLine();
-                fechaNacimiento = LocalDate.parse(fecha, fechaFormatter);
-
-                System.out.println("Escriba su telefono:");
-                telefono = scanner.nextLine();
-
-                System.out.println("Escriba su afp:");
-                afp = scanner.nextLine();
-
-                System.out.println("Escriba su sistema de salud (Fonasa o Isapre):");
-                sistema = scanner.nextLine();
-                SistemaSalud sistemaSalud = SistemaSalud.valueOf(sistema.toUpperCase());
-
-                System.out.println("Escriba su direccion:");
-                direccion = scanner.nextLine();
-
-                System.out.println("Escriba su comuna:");
-                comuna = scanner.nextLine();
-
-                System.out.println("Escriba su edad:");
-                edad = scanner.nextInt();
-
-                Cliente cliente = new Cliente(nombre,fechaNacimiento,run,apellidos,telefono,afp,sistemaSalud,direccion,comuna,edad);
-                almacenarUsuario(cliente);
-                cliente.analizarUsuario();
-                break;
+                return "usuario.Cliente";
             case 2:
-                System.out.println("Escriba su nombre:");
-                nombre = scanner.nextLine();
-
-                System.out.println("Escriba su run:");
-                run = scanner.nextInt();
-                scanner.nextLine(); // Agrega esta línea para consumir el salto de línea después de leer el entero
-
-                System.out.println("Escriba su fecha de nacimiento (DD/MM/AAAA):");
-                fecha = scanner.nextLine();
-                fechaNacimiento = LocalDate.parse(fecha, fechaFormatter);
-
-                System.out.println("Escriba su titulo");
-                titulo = scanner.nextLine();
-
-                System.out.println("Escriba su fecha de ingreso:");
-                fechaIngreso = scanner.nextLine();
-
-
-                Profesional profesional = new Profesional(nombre, fechaNacimiento, run,titulo, fechaIngreso);
-                almacenarUsuario(profesional);
-                profesional.analizarUsuario();
-
-                break;
+                return "usuario.Profesional";
             case 3:
-               System.out.println("Escriba su nombre:");
-                nombre = scanner.nextLine();
-                System.out.println("Escriba su fecha de nacimiento (DD/MM/AAAA):");
-                fecha = scanner.nextLine();
-                fechaNacimiento = LocalDate.parse(fecha, fechaFormatter);
-                System.out.println("Escriba su run:");
-                run = scanner.nextInt();
-                scanner.nextLine();
-                System.out.println("Ingrese su area: ");
-                area = scanner.next();
-                System.out.println("Ingrese su experiencia:");
-                experienciaPrevia = scanner.nextLine();
-                Administrativo administrativo = new Administrativo(nombre, fechaNacimiento, run, area, experienciaPrevia);
-                almacenarUsuario(administrativo);
-                administrativo.analizarUsuario();
-                break;
+                return "usuario.Administrativo";
+            default:
+                return null;
+        }
+    }
 
+    public Usuario crearUsuario(int op, Scanner scanner) {
+        try {
+            Class<?> usuarioClass = Class.forName(obtenerNombreClase(op));
+            Constructor<?> constructor = usuarioClass.getConstructor(Scanner.class);
+            return (Usuario) constructor.newInstance(scanner);
+        } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException |
+                 IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
 
-    public void almacenarCapacitacon(Capacitacion capacitacion) {
+    public void almacenarCapacitacon() {
+        Capacitacion capacitacion = new Capacitacion();
         capacitaciones.add(capacitacion);
     }
 
+    public void listarUsuarioPorTipo() {
+        int op;
+        int i = 1;
+        System.out.println("================================================================");
+        System.out.println("1. Cliente");
+        System.out.println("2. Profesional");
+        System.out.println("3. Administrativo");
+        System.out.println("================================================================");
+        op = new Scanner(System.in).nextInt();
+        switch (op) {
+            case 1: {
+                for (IAsesoria cliente : usuarios) {
+                    if (cliente instanceof Cliente) {
+                        System.out.println("Usuario " + i);
+                        System.out.println("----------------------");
+                        cliente.analizarUsuario();
+                        System.out.println("----------------------");
+                        i++;
+                    }
+
+                }
+                break;
+            }
+            case 2: {
+                for (IAsesoria profesional : usuarios) {
+                    if (profesional instanceof Profesional) {
+                        System.out.println("Usuario " + i);
+                        System.out.println("----------------------");
+                        profesional.analizarUsuario();
+                        System.out.println("----------------------");
+                        i++;
+
+                    }
+                }
+
+            }
+            case 3: {
+                for (IAsesoria administrativo : usuarios) {
+                    if (administrativo instanceof Administrativo) {
+                        System.out.println("Usuario " + i);
+                        System.out.println("----------------------");
+                        administrativo.analizarUsuario();
+                        System.out.println("----------------------");
+                        i++;
+                    }
+                }
+                break;
+            }
+            default:
+                System.out.println("Elija la opcion correcta");
+
+
+        }
+    }
 
     public void eliminarUsuario() {
 
@@ -160,28 +260,40 @@ public class Contenedor {
             System.out.println("Se ha eliminado correctamente al usuario con run: " + run);
 
         } else {
-            System.out.println("El run ingresado no esta registrado, intente nuevamente");
-            eliminarUsuario();
+            System.out.println("El run ingresado no esta registrado. ¿Quiere intentar nuevamente? (1.SI 2.NO");
+            Scanner scanner = new Scanner(System.in);
+            int op = scanner.nextInt();
+            if (op == 1) {
+                eliminarUsuario();
+            }
+            Menu menu = new Menu();
+            menu.orquestaMenu();
+
         }
     }
 
 
     public void listarUsuarios() {
+        int i = 1;
         for (IAsesoria usuario : usuarios) {
+            System.out.println("Usuario " + i);
+            System.out.println("----------------------");
             usuario.analizarUsuario();
+            i++;
+            System.out.println("----------------------");
         }
     }
 
     public void listarCapacitaciones() {
         for (Capacitacion capacitacion : capacitaciones) {
-            System.out.println("El id de la capacitacion es: " + capacitacion.getId() + "\nesta asociada al run de cliente: "+
+            System.out.println("El id de la capacitacion es: " + capacitacion.getId() + "\nesta asociada al run de cliente: " +
                     capacitacion.getCliente().getRun() + "\nEsta sera el dia: " + capacitacion.getDia() + "\na las: " + capacitacion.getHora() + "\nen: "
                     + capacitacion.getLugar() + "\ny esta durará: " + capacitacion.getDuracion() + " minutos." + "\ny tiene " + capacitacion.getCantidadAsistentes() + " asistentes.\n");
 
             System.out.println("Los datos del cliente son: " + "\nNombre del cliente: " + capacitacion.getCliente().getNombre() + " " +
-                    capacitacion.getCliente().getApellidos() + "\nTelefono: " + capacitacion.getCliente().getTelefono() +"\nAFP: "
-                    + capacitacion.getCliente().getAfp() + "\nSistema de salud: "+ capacitacion.getCliente().obtenerSistemaDeSalud() + "\nDireccion: "
-                    + capacitacion.getCliente().getDireccion() + "\nComuna: "+ capacitacion.getCliente().getComuna() + "\nEdad: "+ capacitacion.getCliente().getEdad());
+                    capacitacion.getCliente().getApellidos() + "\nTelefono: " + capacitacion.getCliente().getTelefono() + "\nAFP: "
+                    + capacitacion.getCliente().getAfp() + "\nSistema de salud: " + capacitacion.getCliente().obtenerSistemaDeSalud() + "\nDireccion: "
+                    + capacitacion.getCliente().getDireccion() + "\nComuna: " + capacitacion.getCliente().getComuna() + "\nEdad: " + capacitacion.getCliente().getEdad());
             System.out.println("--------------------------------");
 
 

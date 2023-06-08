@@ -1,6 +1,7 @@
 package usuario;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class Cliente extends Usuario {
     private String apellidos;
@@ -14,11 +15,14 @@ public class Cliente extends Usuario {
     private String comuna;
     private int edad;
 
-    public Cliente (){
+    public Cliente() {
 
 
     }
 
+    public Cliente(Scanner scanner) {
+
+    }
 
     public Cliente(String nombre, LocalDate fechaNacimiento, int run, String apellidos, String telefono, String afp, SistemaSalud sistemaSalud, String direccion, String comuna, int edad) {
         super(nombre, fechaNacimiento, run);
@@ -91,7 +95,7 @@ public class Cliente extends Usuario {
         this.sistemaSalud = sistemaSalud;
     }
 
-    public String obtenerSistemaDeSalud(){
+    public String obtenerSistemaDeSalud() {
 
         switch (sistemaSalud.ordinal() + 1) {
             case 1:
@@ -104,6 +108,46 @@ public class Cliente extends Usuario {
 
         }
         return null;
+    }
+
+
+
+    @Override
+    public void solicitarDatos(Scanner scanner) {
+
+
+        System.out.println("Escriba su nombre: ");
+        setNombre(scanner.nextLine());
+        System.out.println("Escriba sus apellidos: ");
+        apellidos = scanner.nextLine();
+        super.solicitarDatos(scanner);
+        System.out.println("Escriba su telefono: ");
+        telefono = scanner.nextLine();
+        System.out.println("Escriba su afp; ");
+        afp = scanner.nextLine();
+
+        boolean sistemaValido = false;
+
+        while (!sistemaValido) {
+            System.out.println("Escriba su sistema de salud (Fonasa o Isapre):");
+            String sistema = scanner.nextLine();
+            sistema = sistema.toUpperCase();
+
+            if (sistema.equals("FONASA") || sistema.equals("ISAPRE")) {
+                sistemaSalud = SistemaSalud.valueOf(sistema);
+                sistemaValido = true;
+            } else {
+                System.out.println("El sistema de salud ingresado no es válido. Por favor, intente nuevamente.");
+            }
+        }
+
+        System.out.println("Escriba su dirección: ");
+        direccion = scanner.nextLine();
+        System.out.println("Escriba su comuna; ");
+        comuna = scanner.nextLine();
+        System.out.println("Escriba su edad: ");
+        edad = scanner.nextInt();
+
     }
 
     @Override

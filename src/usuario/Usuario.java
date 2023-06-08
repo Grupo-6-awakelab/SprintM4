@@ -3,11 +3,14 @@ package usuario;
 import capacitacion.IAsesoria;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 public class Usuario implements IAsesoria {
     private String nombre;
     private LocalDate fechaNacimiento;
     private int run;
+    private DateTimeFormatter fechaFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 
     public Usuario(){
@@ -49,10 +52,23 @@ public class Usuario implements IAsesoria {
         int edad = LocalDate.now().getYear() - fechaNacimiento.getYear();
         System.out.println( "El usuario " + nombre + " tiene " + edad + " años");;
 
+
     }
 
 
+    public void solicitarDatos(Scanner scanner) {
 
+        System.out.println("Escriba su run:");
+        run = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Escriba su Fecha de nacimiento:");
+        fechaNacimiento = LocalDate.parse(scanner.nextLine(),fechaFormatter);
+
+
+
+
+
+    }
 
     @Override
     public String toString() {
