@@ -6,11 +6,11 @@ public class Administrativo extends Usuario {
     private String area;
     private String experienciaPrevia;
 
-    public Administrativo(String nombre, String apellidos, int run, String area, String experienciaPrevia) {
+    public Administrativo() {
     }
 
-    public Administrativo(String nombreCompleto, LocalDate fechaNacimiento, int run, String area, String experienciaPrevia) {
-        super(nombreCompleto, fechaNacimiento, run);
+    public Administrativo(String nombre, LocalDate fechaNacimiento, int run, String area, String experienciaPrevia) {
+        super(nombre, fechaNacimiento, run);
         this.area = area;
         this.experienciaPrevia = experienciaPrevia;
     }

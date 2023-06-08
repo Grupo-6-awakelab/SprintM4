@@ -1,9 +1,6 @@
 import capacitacion.Capacitacion;
 import capacitacion.IAsesoria;
-import usuario.Administrativo;
-import usuario.Cliente;
-import usuario.SistemaSalud;
-import usuario.Usuario;
+import usuario.*;
 
 import javax.swing.*;
 import java.time.LocalDate;
@@ -48,6 +45,8 @@ public class Contenedor {
         String fechaIngreso;
         String area;
         String experienciaPrevia;
+        LocalDate fechaNacimiento;
+        DateTimeFormatter fechaFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         switch(op){
             case 1:
@@ -63,8 +62,7 @@ public class Contenedor {
 
                 System.out.println("Escriba su fecha de nacimiento (DD/MM/AAAA):");
                 fecha = scanner.nextLine();
-                DateTimeFormatter fechaFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate fechaNacimiento = LocalDate.parse(fecha, fechaFormatter);
+                fechaNacimiento = LocalDate.parse(fecha, fechaFormatter);
 
                 System.out.println("Escriba su telefono:");
                 telefono = scanner.nextLine();
@@ -90,13 +88,35 @@ public class Contenedor {
                 cliente.analizarUsuario();
                 break;
             case 2:
+                System.out.println("Escriba su nombre:");
+                nombre = scanner.nextLine();
+
+                System.out.println("Escriba su run:");
+                run = scanner.nextInt();
+                scanner.nextLine(); // Agrega esta línea para consumir el salto de línea después de leer el entero
+
+                System.out.println("Escriba su fecha de nacimiento (DD/MM/AAAA):");
+                fecha = scanner.nextLine();
+                fechaNacimiento = LocalDate.parse(fecha, fechaFormatter);
+
+                System.out.println("Escriba su titulo");
+                titulo = scanner.nextLine();
+
+                System.out.println("Escriba su fecha de ingreso:");
+                fechaIngreso = scanner.nextLine();
+
+
+                Profesional profesional = new Profesional(nombre, fechaNacimiento, run,titulo, fechaIngreso);
+                almacenarUsuario(profesional);
+                profesional.analizarUsuario();
 
                 break;
             case 3:
                System.out.println("Escriba su nombre:");
                 nombre = scanner.nextLine();
-                System.out.println("Escriba su apellidos:");
-                apellidos = scanner.nextLine();
+                System.out.println("Escriba su fecha de nacimiento (DD/MM/AAAA):");
+                fecha = scanner.nextLine();
+                fechaNacimiento = LocalDate.parse(fecha, fechaFormatter);
                 System.out.println("Escriba su run:");
                 run = scanner.nextInt();
                 scanner.nextLine();
@@ -104,7 +124,7 @@ public class Contenedor {
                 area = scanner.next();
                 System.out.println("Ingrese su experiencia:");
                 experienciaPrevia = scanner.nextLine();
-                Administrativo administrativo = new Administrativo(nombre, apellidos, run, area, experienciaPrevia);
+                Administrativo administrativo = new Administrativo(nombre, fechaNacimiento, run, area, experienciaPrevia);
                 almacenarUsuario(administrativo);
                 administrativo.analizarUsuario();
                 break;
