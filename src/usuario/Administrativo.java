@@ -6,7 +6,7 @@ public class Administrativo extends Usuario {
     private String area;
     private String experienciaPrevia;
 
-    public Administrativo() {
+    public Administrativo(String nombre, String apellidos, int run, String area, String experienciaPrevia) {
     }
 
     public Administrativo(String nombreCompleto, LocalDate fechaNacimiento, int run, String area, String experienciaPrevia) {

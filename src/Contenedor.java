@@ -1,5 +1,6 @@
 import capacitacion.Capacitacion;
 import capacitacion.IAsesoria;
+import usuario.Administrativo;
 import usuario.Cliente;
 import usuario.SistemaSalud;
 import usuario.Usuario;
@@ -33,50 +34,79 @@ public class Contenedor {
         Scanner scanner = new Scanner(System.in);
         int op = scanner.nextInt();
         scanner.nextLine();
+        String nombre;
+        String apellidos;
+        int run;
+        String fecha;
+        String telefono;
+        String afp;
+        String sistema;
+        String direccion;
+        String comuna;
+        int edad;
+        String titulo;
+        String fechaIngreso;
+        String area;
+        String experienciaPrevia;
 
         switch(op){
             case 1:
                 System.out.println("Escriba su nombre:");
-                String nombre = scanner.nextLine();
+                nombre = scanner.nextLine();
 
                 System.out.println("Escriba su apellidos:");
-                String apellidos = scanner.nextLine();
+                apellidos = scanner.nextLine();
 
                 System.out.println("Escriba su run:");
-                int run = scanner.nextInt();
+                run = scanner.nextInt();
                 scanner.nextLine(); // Agrega esta línea para consumir el salto de línea después de leer el entero
 
                 System.out.println("Escriba su fecha de nacimiento (DD/MM/AAAA):");
-                String fecha = scanner.nextLine();
+                fecha = scanner.nextLine();
                 DateTimeFormatter fechaFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 LocalDate fechaNacimiento = LocalDate.parse(fecha, fechaFormatter);
 
                 System.out.println("Escriba su telefono:");
-                String telefono = scanner.nextLine();
+                telefono = scanner.nextLine();
 
                 System.out.println("Escriba su afp:");
-                String afp = scanner.nextLine();
+                afp = scanner.nextLine();
 
                 System.out.println("Escriba su sistema de salud (Fonasa o Isapre):");
-                String sistema = scanner.nextLine();
+                sistema = scanner.nextLine();
                 SistemaSalud sistemaSalud = SistemaSalud.valueOf(sistema.toUpperCase());
 
                 System.out.println("Escriba su direccion:");
-                String direccion = scanner.nextLine();
+                direccion = scanner.nextLine();
 
                 System.out.println("Escriba su comuna:");
-                String comuna = scanner.nextLine();
+                comuna = scanner.nextLine();
 
                 System.out.println("Escriba su edad:");
-                int edad = scanner.nextInt();
+                edad = scanner.nextInt();
 
                 Cliente cliente = new Cliente(nombre,fechaNacimiento,run,apellidos,telefono,afp,sistemaSalud,direccion,comuna,edad);
                 almacenarUsuario(cliente);
                 cliente.analizarUsuario();
                 break;
             case 2:
+
                 break;
             case 3:
+               System.out.println("Escriba su nombre:");
+                nombre = scanner.nextLine();
+                System.out.println("Escriba su apellidos:");
+                apellidos = scanner.nextLine();
+                System.out.println("Escriba su run:");
+                run = scanner.nextInt();
+                scanner.nextLine();
+                System.out.println("Ingrese su area: ");
+                area = scanner.next();
+                System.out.println("Ingrese su experiencia:");
+                experienciaPrevia = scanner.nextLine();
+                Administrativo administrativo = new Administrativo(nombre, apellidos, run, area, experienciaPrevia);
+                almacenarUsuario(administrativo);
+                administrativo.analizarUsuario();
                 break;
 
         }
