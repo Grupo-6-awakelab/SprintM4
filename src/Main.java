@@ -1,5 +1,6 @@
 import capacitacion.Capacitacion;
 import usuario.Cliente;
+import usuario.Profesional;
 import usuario.SistemaSalud;
 
 import java.time.LocalDate;
@@ -21,16 +22,18 @@ public class Main {
 
         Capacitacion capacitacion = new Capacitacion(1231,cliente2,"miercoles","12:00","chile","60",3);
 
-        Contenedor contenedor = new Contenedor();
+//        Contenedor contenedor = new Contenedor();
 //        contenedor.almacenarUsuario(cliente);
 //        contenedor.almacenarUsuario(cliente2);
 //        contenedor.almacenarCapacitacon(capacitacion);
 //
 //        contenedor.listarCapacitaciones();
 
-        contenedor.agregarUsuario();
 
+ //       contenedor.agregarUsuario();
 
+        Profesional profesional = new Profesional();
+        profesional.analizarUsuario();
 
 
 
