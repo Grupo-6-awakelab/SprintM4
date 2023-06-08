@@ -11,21 +11,24 @@ public class Main {
 
         Cliente cliente = new Cliente("Kevin", LocalDate.now(),
                 1111, "Apellido", "123123",
-                "asdasd", SistemaSalud.Isapre,"asdasd","asdasd",12);
-//        Cliente cliente2 = new Cliente("Kevin1", LocalDate.now(),
-//                2222, "Apellido", "123123",
-//                "asdasd", SistemaSalud.Isapre,"asdasd","asdasd",12);
+            "asdasd", SistemaSalud.ISAPRE,"asdasd","asdasd",12);
+    Cliente cliente2 = new Cliente("Kevin1", LocalDate.now(),
+                2222, "Apellido", "123123",
+           "asdasd", SistemaSalud.ISAPRE,"asdasd","asdasd",12);
 //        Cliente cliente3 = new Cliente("Kevin1", LocalDate.now(),
 //                3333, "Apellido", "123123",
-//                "asdasd", SistemaSalud.Isapre,"asdasd","asdasd",12);
+//                "asdasd", SistemaSalud.FONASA,"asdasd","asdasd",12);
 
-        Capacitacion capacitacion = new Capacitacion(1231,cliente,"miercoles","12:00","chile","60",3);
+        Capacitacion capacitacion = new Capacitacion(1231,cliente2,"miercoles","12:00","chile","60",3);
 
         Contenedor contenedor = new Contenedor();
-        contenedor.almacenarCliente(cliente);
-        contenedor.almacenarCapacitacono(capacitacion);
+//        contenedor.almacenarUsuario(cliente);
+//        contenedor.almacenarUsuario(cliente2);
+//        contenedor.almacenarCapacitacon(capacitacion);
+//
+//        contenedor.listarCapacitaciones();
 
-        contenedor.listarCapacitaciones();
+        contenedor.agregarUsuario();
 
 
 

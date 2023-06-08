@@ -1,8 +1,8 @@
 package usuario;
 
 public enum SistemaSalud {
-    Fonasa,
-    Isapre;
+    FONASA,
+    ISAPRE;
 }
 /**
  *hola
