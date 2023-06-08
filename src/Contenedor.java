@@ -47,6 +47,9 @@ public class Contenedor {
         String experienciaPrevia;
         LocalDate fechaNacimiento;
         DateTimeFormatter fechaFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        /**
+         * para agregar
+         */
 
         switch(op){
             case 1:
