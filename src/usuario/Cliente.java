@@ -115,13 +115,12 @@ public class Cliente extends Usuario {
     }
 
 
-
     @Override
     public void solicitarDatos(Scanner scanner) {
 
 
         System.out.println("Escriba su nombre: ");
-        setNombre(scanner.nextLine());
+        setNombre(validarNombre(scanner.nextLine()));
         System.out.println("Escriba sus apellidos: ");
         apellidos = scanner.nextLine();
         super.solicitarDatos(scanner);

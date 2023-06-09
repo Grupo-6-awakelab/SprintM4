@@ -186,6 +186,19 @@ public class Contenedor {
         capacitaciones.add(capacitacion);
     }
 
+
+    public void listarporTipo(Class c, int i) {
+        for (IAsesoria usuario : usuarios) {
+            if (c.isInstance(usuario)) {
+                System.out.println("Usuario " + i);
+                System.out.println("----------------------");
+                usuario.analizarUsuario();
+                System.out.println("----------------------");
+                i++;
+            }
+        }
+    }
+
     public void listarUsuarioPorTipo() {
         int op;
         int i = 1;
@@ -196,44 +209,16 @@ public class Contenedor {
         System.out.println("================================================================");
         op = new Scanner(System.in).nextInt();
         switch (op) {
-            case 1: {
-                for (IAsesoria cliente : usuarios) {
-                    if (cliente instanceof Cliente) {
-                        System.out.println("Usuario " + i);
-                        System.out.println("----------------------");
-                        cliente.analizarUsuario();
-                        System.out.println("----------------------");
-                        i++;
-                    }
-
-                }
+            case 1:
+                listarporTipo(Cliente.class, i);
                 break;
-            }
-            case 2: {
-                for (IAsesoria profesional : usuarios) {
-                    if (profesional instanceof Profesional) {
-                        System.out.println("Usuario " + i);
-                        System.out.println("----------------------");
-                        profesional.analizarUsuario();
-                        System.out.println("----------------------");
-                        i++;
-
-                    }
-                }
-
-            }
-            case 3: {
-                for (IAsesoria administrativo : usuarios) {
-                    if (administrativo instanceof Administrativo) {
-                        System.out.println("Usuario " + i);
-                        System.out.println("----------------------");
-                        administrativo.analizarUsuario();
-                        System.out.println("----------------------");
-                        i++;
-                    }
-                }
+            case 2:
+                listarporTipo(Administrativo.class, i);
                 break;
-            }
+            case 3:
+                listarporTipo(Profesional.class, i);
+                break;
+
             default:
                 System.out.println("Elija la opcion correcta");
 
