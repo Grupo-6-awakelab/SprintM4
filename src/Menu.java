@@ -62,6 +62,7 @@ public class Menu {
         System.out.println("4. Listar Usuarios");
         System.out.println("5. Listar Capacitaciones");
         System.out.println("6. Listar por tipo de Usuarios");
+        System.out.println("0. Salir");
         System.out.println("---------------------------");
     }
     public int opcionDeMenu(){

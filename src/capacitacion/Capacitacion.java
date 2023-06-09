@@ -3,6 +3,8 @@ package capacitacion;
 import usuario.Cliente;
 import usuario.Usuario;
 
+import java.util.Scanner;
+
 
 public class Capacitacion {
     private int id;
@@ -21,8 +23,8 @@ public class Capacitacion {
 
     }
 
-    public Capacitacion(int id, Cliente cliente, String dia, String hora, String lugar, String duracion, int cantidadAsistentes) {
-        this.id = id;
+    public Capacitacion(Cliente cliente, String dia, String hora, String lugar, String duracion, int cantidadAsistentes) {
+        this.id = id();
         this.cliente = cliente;
         this.dia = dia;
         this.hora = hora;
@@ -105,8 +107,15 @@ public class Capacitacion {
         sb.append('}');
         return sb.toString();
     }
+    private int id(){
+        return (int) (Math.random() * 8999999) + 1000000;
+    }
+    private Capacitacion(Scanner scanner){
+    }
 
+    public void solicitarDatos(Scanner scanner) {
 
-
+    }
 }
+
 
