@@ -83,8 +83,12 @@ public class Cliente extends Usuario {
         this.edad = edad;
     }
 
+    /**
+     * en el metodo obtenerNombre() traemos el nombre de la clase usuario y el apellido de la clase
+     * cliente.
+     */
     public String obtenerNombre() {
-        return getNombre() + "" + apellidos;
+        return getNombre() + " " + apellidos;
     }
 
     public SistemaSalud getSistemaSalud() {
@@ -170,6 +174,8 @@ public class Cliente extends Usuario {
         sb.append('}');
         return sb.toString();
     }
+
+
 }
 
 

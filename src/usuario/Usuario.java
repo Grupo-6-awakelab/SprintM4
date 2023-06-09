@@ -4,6 +4,7 @@ import capacitacion.IAsesoria;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Usuario implements IAsesoria {
@@ -57,17 +58,41 @@ public class Usuario implements IAsesoria {
 
 
     public void solicitarDatos(Scanner scanner) {
-
         System.out.println("Escriba su run:");
         run = scanner.nextInt();
         scanner.nextLine();
-        System.out.println("Escriba su Fecha de nacimiento:");
-        fechaNacimiento = LocalDate.parse(scanner.nextLine(),fechaFormatter);
+        while (run >= 99999999) {
+            System.out.println("RUT inválido. Intente nuevamente.");
+            System.out.println("Escriba su run:");
+            run = scanner.nextInt();
+            scanner.nextLine();
+        }
+        LocalDate fechaNacimiento = null;
+        do {
+            System.out.println("Escriba su Fecha de nacimiento: (dd/MM/yyyy)");
+            String fechaIngresada = scanner.nextLine();
+            try {
+                fechaNacimiento = LocalDate.parse(fechaIngresada, fechaFormatter);
+            } catch (DateTimeParseException e) {
+                System.out.println("Fecha de nacimiento inválida. Intente nuevamente.");
+            }
+        } while (fechaNacimiento == null);
+    }
 
-
-
-
-
+    public String validarNombre(String s) {
+        boolean valid = false;
+        while (!valid) {
+            if (s.length() >= 10 && s.length() <= 50) {
+                valid = true;
+            } else {
+                System.out.println("El nombre contiene errores. Debe tener entre 10 y 50 caracteres.");
+                System.out.println("Por favor, ingrese un nuevo nombre:");
+                Scanner scanner = new Scanner(System.in);
+                String nombre = validarNombre(scanner.nextLine());
+                return nombre;
+            }
+        }
+        return s;
     }
 
     @Override
