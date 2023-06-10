@@ -290,7 +290,7 @@ public class Contenedor {
     }
 
     public void almacenarCapacitacon() {
-        String dia;
+
         Capacitacion capacitacion = new Capacitacion();
         System.out.println("Ingrese su run");
         Scanner entrada = new Scanner(System.in);
@@ -303,34 +303,33 @@ public class Contenedor {
                 if (c.getRun() == run) {
                     clienteAsignado = c;
                 } else {
-                    System.out.println("error");
+                    System.out.println("error, ingrese nuevamente");
+                    run = entrada.nextInt();
                 }
             }
         }
-        System.out.println("ingrese el dia de la capacitacion");
-        dia = entrada.nextLine();
-        public void validarDia(dia) {
+        System.out.println("ingrese el dia de la capacitacion, en minúscula");
+     //   entrada.nextLine();
+        String dia = entrada.nextLine();
         boolean valid = false;
         while (!valid) {
-            if (diavalido(dia)) {
+            if (capacitacion.diavalido(dia)) {
                 dia = dia;
                 valid = true;
-// CORREGIR PROBLEMA
+
             } else {
                 System.out.println("Error, ingrese dia valido");
                 Scanner scanner = new Scanner(System.in);
                 dia = scanner.nextLine();
-                diavalido(dia);
+                capacitacion.diavalido(dia);
 
             }
 
         }
-        }
-
-
+        //Ingreso y validacion de hora
        System.out.println("Ingrese la Hora");
         String hora = entrada.nextLine();
-        boolean valid = false;
+        valid = false;
         while (!valid) {
             if (capacitacion.horaValida(hora)) {
                 hora = hora;
@@ -344,15 +343,13 @@ public class Contenedor {
             }
 
         }
-
-
-
+        //ingreso de lugar de capacitacion
         System.out.println("Ingrese el lugar de la capacitación");
         capacitacion.validarLugar(entrada.nextLine());
-
+    //Ingreso de la duracion de la capacitacion
         System.out.println("Ingrese la duración");
         capacitacion.validarDuracion(entrada.nextLine());
-
+//ingreso de la cantidad de asistentes
         System.out.println("Ingrese cantidad asistentes");
         capacitacion.validarAsistentes((entrada.nextInt()));
 

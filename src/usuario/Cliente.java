@@ -122,12 +122,12 @@ public class Cliente extends Usuario {
         System.out.println("Escriba su nombre: ");
         setNombre(validarNombre(scanner.nextLine()));
         System.out.println("Escriba sus apellidos: ");
-        apellidos = scanner.nextLine();
+        setApellidos(validarApellido(scanner.nextLine()));
         super.solicitarDatos(scanner);
         System.out.println("Escriba su telefono: ");
-        telefono = scanner.nextLine();
+        setTelefono(validarTelefono(scanner.nextLine()));
         System.out.println("Escriba su afp; ");
-        afp = scanner.nextLine();
+        setAfp(validarAfp(scanner.nextLine()));
 
         boolean sistemaValido = false;
 
@@ -145,12 +145,11 @@ public class Cliente extends Usuario {
         }
 
         System.out.println("Escriba su dirección: ");
-        direccion = scanner.nextLine();
+        setDireccion(validarDireccion(scanner.nextLine()));
         System.out.println("Escriba su comuna; ");
-        comuna = scanner.nextLine();
+        setComuna(validarComuna(scanner.nextLine()));
         System.out.println("Escriba su edad: ");
-        edad = scanner.nextInt();
-
+        setEdad(validarEdad(scanner.nextInt()));
     }
 
     @Override
@@ -174,6 +173,71 @@ public class Cliente extends Usuario {
         return sb.toString();
     }
 
+    public String validarApellido(String s) {
+        boolean valid = false;
+        while (!valid) {
+            if (s.length() >= 5 && s.length() <= 30) {
+                valid = true;
+            } else {
+                System.out.println("El apellido contiene errores. Debe tener entre 5 y 30 caracteres.");
+                System.out.println("Por favor, ingrese un nuevo nombre:");
+                Scanner scanner = new Scanner(System.in);
+                String apellido = validarNombre(scanner.nextLine());
+                return apellido;
+            }
+        }
+        return s;
+    }
+    public String validarTelefono(String fono){
+    if (fono.isEmpty()) {
+        System.out.println("El teléfono es obligatorio. Intente nuevamente.");
+        Scanner scanner = new Scanner(System.in);
+        fono = scanner.nextLine();
+        }
+        return fono;
+    }
+
+    public String validarAfp(String afp){
+        if (afp.length() >= 4 && afp.length() <= 30) {
+            System.out.println("Lo ingresado debe estar entre 4 y 30 caracteres. Intente nuevamente.");
+            Scanner scanner = new Scanner(System.in);
+            afp = scanner.nextLine();
+
+        }
+        return afp;
+    }
+    public String validarDireccion(String dir){
+        if (dir.length() >= 70) {
+            System.out.println("No puede ingresar mas de 70 caracteres. Intente nuevamente.");
+            Scanner scanner = new Scanner(System.in);
+            dir = scanner.nextLine();
+
+        }
+        return dir;
+    }
+    public String validarComuna(String comuna){
+        if (comuna.length() >= 50) {
+            System.out.println("No puede ingresar mas de 50 caracteres. Intente nuevamente.");
+            Scanner scanner = new Scanner(System.in);
+            comuna = scanner.nextLine();
+
+        }
+        return comuna;
+    }
+    public int validarEdad(int edad) {
+        boolean valid = false;
+        while (!valid) {
+            if (edad >= 0 && edad <= 150) {
+                valid = true;
+            } else {
+                System.out.println("La edad ingresada no es válida. Debe estar entre 0 y 150 años.");
+                System.out.println("Por favor, ingrese una nueva edad:");
+                Scanner scanner = new Scanner(System.in);
+                edad = scanner.nextInt();
+            }
+        }
+        return edad;
+    }
 
 }
 

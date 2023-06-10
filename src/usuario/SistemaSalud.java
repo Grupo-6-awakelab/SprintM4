@@ -4,6 +4,4 @@ public enum SistemaSalud {
     FONASA,
     ISAPRE;
 }
-/**
- *hola
- */
+

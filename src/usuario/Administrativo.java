@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Administrativo extends Usuario {
     private String area;
     private String experienciaPrevia;
+    private String s;
 
     public Administrativo() {
     }
@@ -45,25 +46,10 @@ public class Administrativo extends Usuario {
         System.out.println("Escriba su nombre: ");
         setNombre(validarNombre(scanner.nextLine()));
         super.solicitarDatos(scanner);
-        do {
-            System.out.println("Escriba su área:");
-            area = scanner.nextLine();
-            if (area.length() < 5 || area.length() > 20) {
-                System.out.println("Debe ingresar entre 5 y 20 caracteres. Intente nuevamente.");
-            }
-        } while (area.length() < 5 || area.length() > 20);
-        this.area = area;
-
-        do {
-            System.out.println("Escriba su experiencia previa:");
-            experienciaPrevia = scanner.nextLine();
-            if (experienciaPrevia.length() > 100) {
-                System.out.println("Largo máximo de caracteres (100) superado, ingrese menos caracteres.");
-            }
-        } while (experienciaPrevia.length() > 100);
-        this.experienciaPrevia = experienciaPrevia;
-
-
+        System.out.println("Escriba su área:");
+        setArea(validarArea(scanner.nextLine()));
+        System.out.println("Escriba su experiencia previa:");
+        setExperienciaPrevia(validarExperiencia(scanner.nextLine()));
     }
     @Override
     public String toString() {
@@ -79,5 +65,22 @@ public class Administrativo extends Usuario {
             System.out.println("su área es: " + area + ", y su experiencia previa: " + experienciaPrevia);
         }
 
-
+        public String validarArea(String area){
+            do {
+                if (area.length() < 5 || area.length() > 20) {
+                    System.out.println("Debe ingresar entre 5 y 20 caracteres. Intente nuevamente.");
+                }
+            } while (area.length() < 5 || area.length() > 20);
+            this.area = area;
+            return area;
+    }
+          public String validarExperiencia(String s) {
+            do {
+                if (s.length() > 100) {
+                System.out.println("Largo máximo de caracteres (100) superado, ingrese menos caracteres.");
+                }
+            } while (s.length() > 100);
+            this.s = s;
+            return s;
+    }
 }

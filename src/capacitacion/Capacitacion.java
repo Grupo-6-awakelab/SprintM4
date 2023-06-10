@@ -137,16 +137,23 @@ public class Capacitacion {
     }
 
     public String validarDuracion(String D) {
-        String duracion;
-        do {
-            Scanner scanner = new Scanner(System.in);
-            duracion = scanner.nextLine();
-            if (duracion.length() > 100) {
+            if (D.length() > 70) {
                 System.out.println("el texto ingresado no debe superar los 70 caracteres, ingrese nuevamente");
+                Scanner scanner = new Scanner(System.in);
+                D = scanner.nextLine();
             }
-        } while (duracion.length() > 100);
         return D;
     }
+    public int validarAsistentes(int A) {
+        if (A >= 1000) {
+            System.out.println("No debe superar los 1000 asistentes. Intente nuevamente.");
+            Scanner scanner = new Scanner(System.in);
+            A = scanner.nextInt();
+        }
+        return A;
+    }
+
+
 
 
     public boolean horaValida(String hora) {
@@ -160,18 +167,7 @@ public class Capacitacion {
 
     }
 
-    public int validarAsistentes(int A) {
 
-        do {
-            Scanner scanner = new Scanner(System.in);
-            scanner.nextLine();
-            A = scanner.nextInt();
-            if (A >= 1000) {
-                System.out.println("No debe superar los 1000 asistentes. Intente nuevamente.");
-            }
-        } while (A >= 1000);
-        return A;
-    }
 
 
 }

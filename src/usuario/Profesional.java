@@ -47,23 +47,12 @@ public class Profesional extends Usuario {
         System.out.println("Escriba su nombre: ");
         setNombre(validarNombre(scanner.nextLine()));
         super.solicitarDatos(scanner);
-        do {
-            System.out.println("Escriba su título: ");
-            titulo = scanner.nextLine();
-            if (titulo.length() < 10 || titulo.length() > 50) {
-                System.out.println("Debe ingresar entre 10 y 50 caracteres. Intente nuevamente.");
-            }
-        } while (titulo.length() < 10 || titulo.length() > 50);
-        this.titulo = titulo;
+        System.out.println("Escriba su título: ");
+        setTitulo(validarTitulo(scanner.nextLine()));
         System.out.println("Escriba su Fecha de ingreso: (dd/MM/yyyy)");
         fechaIngreso = scanner.nextLine();
 
     }
-
-
-
-
-
         @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Profesional{");
@@ -77,5 +66,15 @@ public class Profesional extends Usuario {
     public void analizarUsuario() {
         super.analizarUsuario();
         System.out.println("su titulo es: " + getTitulo() + ", y su fecha de ingreso fue: " + getFechaIngreso());
+    }
+
+    public String validarTitulo(String titulo){
+        do {
+             if (titulo.length() < 10 || titulo.length() > 50) {
+                System.out.println("Debe ingresar entre 10 y 50 caracteres. Intente nuevamente.");
+            }
+        } while (titulo.length() < 10 || titulo.length() > 50);
+        this.titulo = titulo;
+        return titulo;
     }
 }

@@ -59,14 +59,7 @@ public class Usuario implements IAsesoria {
 
     public void solicitarDatos(Scanner scanner) {
         System.out.println("Escriba su run:");
-        run = scanner.nextInt();
-        scanner.nextLine();
-        while (run >= 99999999) {
-            System.out.println("RUT inválido. Intente nuevamente.");
-            System.out.println("Escriba su run:");
-            run = scanner.nextInt();
-            scanner.nextLine();
-        }
+        setRun(validarRut(scanner.nextInt()));
         LocalDate fechaNacimiento = null;
         do {
             System.out.println("Escriba su Fecha de nacimiento: (dd/MM/yyyy)");
@@ -108,5 +101,16 @@ public class Usuario implements IAsesoria {
     @Override
     public void analizarUsuario() {
         System.out.println("Su nombre es: " + nombre + " y su rut es: " + run);
+    }
+
+    public int validarRut(int rut){
+        Scanner scanner = new Scanner(System.in);
+        while (run >= 99999999) {
+            System.out.println("RUT inválido. Intente nuevamente.");
+            System.out.println("Escriba su run:");
+            run = scanner.nextInt();
+            scanner.nextLine();
+        }
+        return rut;
     }
 }
