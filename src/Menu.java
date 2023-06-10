@@ -1,5 +1,9 @@
 import capacitacion.Capacitacion;
+import usuario.Cliente;
+import usuario.SistemaSalud;
+import usuario.Usuario;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Menu {
@@ -8,7 +12,8 @@ public class Menu {
 
     public void orquestaMenu() {
         int op;
-
+        Usuario cliente1 = new Cliente("Luis", LocalDate.of(1986, 3, 7), 7890123, "987654321","adaadad","adada", SistemaSalud.FONASA,"adada","adada",123);
+        contenedor.adduser(cliente1);
         do {
             muestraMenu();
             System.out.println("Selecciona la opción del menú: ");
@@ -69,4 +74,7 @@ public class Menu {
         Scanner entrada = new Scanner(System.in);
         return entrada.nextInt();
     }
+
+
+
 }

@@ -1,8 +1,11 @@
 package capacitacion;
 
 import usuario.Cliente;
-import usuario.Usuario;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -48,9 +51,6 @@ public class Capacitacion {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-
-
-
 
 
     public String getDia() {
@@ -107,15 +107,81 @@ public class Capacitacion {
         sb.append('}');
         return sb.toString();
     }
-    private int id(){
+
+    public boolean diavalido(String dia) {
+        String[] diasValidos = {"lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"};
+        return Arrays.asList(diasValidos).contains(dia);
+    }
+
+    private int id() {
         return (int) (Math.random() * 8999999) + 1000000;
     }
-    private Capacitacion(Scanner scanner){
+
+    private Capacitacion(Scanner scanner) {
     }
 
-    public void solicitarDatos(Scanner scanner) {
+    public String validarLugar(String L) {
+        boolean valid = false;
+        while (!valid) {
+            if (L.length() >= 10 && L.length() <= 50) {
+                valid = true;
+            } else {
+                System.out.println("El lugar contiene errores. Debe tener entre 10 y 50 caracteres.");
+                System.out.println("Por favor, ingrese nuevamente el lugar:");
+                Scanner scanner = new Scanner(System.in);
+                String lugar = validarLugar(scanner.nextLine());
+                return lugar;
+            }
+        }
+        return L;
+    }
+
+    public String validarDuracion(String D) {
+        String duracion;
+        do {
+            Scanner scanner = new Scanner(System.in);
+            duracion = scanner.nextLine();
+            if (duracion.length() > 100) {
+                System.out.println("el texto ingresado no debe superar los 70 caracteres, ingrese nuevamente");
+            }
+        } while (duracion.length() > 100);
+        return D;
+    }
+
+
+    public boolean horaValida(String hora) {
+        DateTimeFormatter horaFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        try {
+            LocalTime.parse(hora, horaFormatter);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
 
     }
+
+    public int validarAsistentes(int A) {
+
+        do {
+            Scanner scanner = new Scanner(System.in);
+            scanner.nextLine();
+            A = scanner.nextInt();
+            if (A >= 1000) {
+                System.out.println("No debe superar los 1000 asistentes. Intente nuevamente.");
+            }
+        } while (A >= 1000);
+        return A;
+    }
+
+
 }
+
+
+
+
+
+
+
+
 
 

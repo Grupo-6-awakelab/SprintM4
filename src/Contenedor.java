@@ -2,11 +2,8 @@ import capacitacion.Capacitacion;
 import capacitacion.IAsesoria;
 import usuario.*;
 
-import javax.swing.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -21,7 +18,7 @@ public class Contenedor {
     }
 
 
-//    public void almacenarUsuario(){
+    //    public void almacenarUsuario(){
 //        System.out.println("================================================================");
 //        System.out.println("1. Cliente");
 //        System.out.println("2. Profesional");
@@ -133,6 +130,9 @@ public class Contenedor {
 //
 //        }
 //    }
+    public void adduser(IAsesoria usuario) {
+        usuarios.add(usuario);
+    }
 
     public void almacenarUsuario() {
         System.out.println("================================================================");
@@ -181,11 +181,15 @@ public class Contenedor {
     }
 
 
-    public void almacenarCapacitacon() {
-        Capacitacion capacitacion = new Capacitacion();
-        capacitaciones.add(capacitacion);
+    private static boolean esDiaValido(String dia) {
+        String[] diasValidos = {"lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"};
+        for (String diaValido : diasValidos) {
+            if (dia.equalsIgnoreCase(diaValido)) {
+                return true;
+            }
+        }
+        return false;
     }
-
 
     public void listarporTipo(Class c, int i) {
         for (IAsesoria usuario : usuarios) {
@@ -282,8 +286,82 @@ public class Contenedor {
             System.out.println("--------------------------------");
 
 
-
-
         }
     }
+
+    public void almacenarCapacitacon() {
+        String dia;
+        Capacitacion capacitacion = new Capacitacion();
+        System.out.println("Ingrese su run");
+        Scanner entrada = new Scanner(System.in);
+        Cliente clienteAsignado = null;
+        int run = entrada.nextInt();
+        entrada.nextLine();
+        for (IAsesoria usuario : usuarios) {
+            if (usuario instanceof Cliente) {
+                Cliente c = (Cliente) usuario;
+                if (c.getRun() == run) {
+                    clienteAsignado = c;
+                } else {
+                    System.out.println("error");
+                }
+            }
+        }
+        System.out.println("ingrese el dia de la capacitacion");
+        dia = entrada.nextLine();
+        public void validarDia(dia) {
+        boolean valid = false;
+        while (!valid) {
+            if (diavalido(dia)) {
+                dia = dia;
+                valid = true;
+// CORREGIR PROBLEMA
+            } else {
+                System.out.println("Error, ingrese dia valido");
+                Scanner scanner = new Scanner(System.in);
+                dia = scanner.nextLine();
+                diavalido(dia);
+
+            }
+
+        }
+        }
+
+
+       System.out.println("Ingrese la Hora");
+        String hora = entrada.nextLine();
+        boolean valid = false;
+        while (!valid) {
+            if (capacitacion.horaValida(hora)) {
+                hora = hora;
+                valid = true;
+
+            } else {
+                System.out.println("Error, ingrese hora valida");
+                hora = entrada.nextLine();
+                capacitacion.horaValida(hora);
+
+            }
+
+        }
+
+
+
+        System.out.println("Ingrese el lugar de la capacitación");
+        capacitacion.validarLugar(entrada.nextLine());
+
+        System.out.println("Ingrese la duración");
+        capacitacion.validarDuracion(entrada.nextLine());
+
+        System.out.println("Ingrese cantidad asistentes");
+        capacitacion.validarAsistentes((entrada.nextInt()));
+
+
 }
+
+}
+
+
+
+
+
