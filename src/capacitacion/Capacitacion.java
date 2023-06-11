@@ -144,13 +144,13 @@ public class Capacitacion {
             }
         return D;
     }
-    public int validarAsistentes(int A) {
-        if (A >= 1000) {
+    public int validarAsistentes(int a) {
+        if (a >= 1000) {
             System.out.println("No debe superar los 1000 asistentes. Intente nuevamente.");
             Scanner scanner = new Scanner(System.in);
-            A = scanner.nextInt();
+            a = scanner.nextInt();
         }
-        return A;
+        return a;
     }
 
 

@@ -18,120 +18,12 @@ public class Contenedor {
     }
 
 
-    //    public void almacenarUsuario(){
-//        System.out.println("================================================================");
-//        System.out.println("1. Cliente");
-//        System.out.println("2. Profesional");
-//        System.out.println("3. Administrativo");
-//        System.out.println("================================================================");
-//        Scanner scanner = new Scanner(System.in);
-//        int op = scanner.nextInt();
-//        scanner.nextLine();
-//        String nombre;
-//        String apellidos;
-//        int run;
-//        String fecha;
-//        String telefono;
-//        String afp;
-//        String sistema;
-//        String direccion;
-//        String comuna;
-//        int edad;
-//        String titulo;
-//        String fechaIngreso;
-//        String area;
-//        String experienciaPrevia;
-//        LocalDate fechaNacimiento;
-//        DateTimeFormatter fechaFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//        /**
-//         * para agregar
-//         */
-//
-//        switch(op){
-//            case 1:
-//                System.out.println("Escriba su nombre:");
-//                nombre = scanner.nextLine();
-//
-//                System.out.println("Escriba su apellidos:");
-//                apellidos = scanner.nextLine();
-//
-//                System.out.println("Escriba su run:");
-//                run = scanner.nextInt();
-//                scanner.nextLine(); // Agrega esta línea para consumir el salto de línea después de leer el entero
-//
-//                System.out.println("Escriba su fecha de nacimiento (DD/MM/AAAA):");
-//                fecha = scanner.nextLine();
-//                fechaNacimiento = LocalDate.parse(fecha, fechaFormatter);
-//
-//                System.out.println("Escriba su telefono:");
-//                telefono = scanner.nextLine();
-//
-//                System.out.println("Escriba su afp:");
-//                afp = scanner.nextLine();
-//
-//                System.out.println("Escriba su sistema de salud (Fonasa o Isapre):");
-//                sistema = scanner.nextLine();
-//                SistemaSalud sistemaSalud = SistemaSalud.valueOf(sistema.toUpperCase());
-//
-//                System.out.println("Escriba su direccion:");
-//                direccion = scanner.nextLine();
-//
-//                System.out.println("Escriba su comuna:");
-//                comuna = scanner.nextLine();
-//
-//                System.out.println("Escriba su edad:");
-//                edad = scanner.nextInt();
-//
-//                Cliente cliente = new Cliente(nombre,fechaNacimiento,run,apellidos,telefono,afp,sistemaSalud,direccion,comuna,edad);
-//                usuarios.add(cliente);
-//                cliente.analizarUsuario();
-//                break;
-//            case 2:
-//                System.out.println("Escriba su nombre:");
-//                nombre = scanner.nextLine();
-//
-//                System.out.println("Escriba su run:");
-//                run = scanner.nextInt();
-//                scanner.nextLine(); // Agrega esta línea para consumir el salto de línea después de leer el entero
-//
-//                System.out.println("Escriba su fecha de nacimiento (DD/MM/AAAA):");
-//                fecha = scanner.nextLine();
-//                fechaNacimiento = LocalDate.parse(fecha, fechaFormatter);
-//
-//                System.out.println("Escriba su titulo");
-//                titulo = scanner.nextLine();
-//
-//                System.out.println("Escriba su fecha de ingreso:");
-//                fechaIngreso = scanner.nextLine();
-//
-//
-//                Profesional profesional = new Profesional(nombre, fechaNacimiento, run,titulo, fechaIngreso);
-//                usuarios.add(profesional);
-//                profesional.analizarUsuario();
-//
-//                break;
-//            case 3:
-//               System.out.println("Escriba su nombre:");
-//                nombre = scanner.nextLine();
-//                System.out.println("Escriba su fecha de nacimiento (DD/MM/AAAA):");
-//                fecha = scanner.nextLine();
-//                fechaNacimiento = LocalDate.parse(fecha, fechaFormatter);
-//                System.out.println("Escriba su run:");
-//                run = scanner.nextInt();
-//                scanner.nextLine();
-//                System.out.println("Ingrese su area: ");
-//                area = scanner.next();
-//                System.out.println("Ingrese su experiencia:");
-//                experienciaPrevia = scanner.nextLine();
-//                Administrativo administrativo = new Administrativo(nombre, fechaNacimiento, run, area, experienciaPrevia);
-//                usuarios.add(administrativo);
-//                administrativo.analizarUsuario();
-//                break;
-//
-//        }
-//    }
+
     public void adduser(IAsesoria usuario) {
         usuarios.add(usuario);
+    }
+    public void addCapacitacion(Capacitacion capacitacion) {
+        this.capacitaciones.add(capacitacion);
     }
 
     public void almacenarUsuario() {
@@ -289,7 +181,7 @@ public class Contenedor {
         }
     }
 
-    public void almacenarCapacitacon() {
+    public void almacenarCapacitacion() {
 
         Capacitacion capacitacion = new Capacitacion();
         System.out.println("Ingrese su run");
@@ -308,6 +200,7 @@ public class Contenedor {
                 }
             }
         }
+        capacitacion.setCliente(clienteAsignado);
         System.out.println("ingrese el dia de la capacitacion, en minúscula");
      //   entrada.nextLine();
         String dia = entrada.nextLine();
@@ -324,8 +217,8 @@ public class Contenedor {
                 capacitacion.diavalido(dia);
 
             }
-
         }
+        capacitacion.setDia(dia);
         //Ingreso y validacion de hora
        System.out.println("Ingrese la Hora");
         String hora = entrada.nextLine();
@@ -343,18 +236,22 @@ public class Contenedor {
             }
 
         }
+        capacitacion.setHora(hora);
         //ingreso de lugar de capacitacion
         System.out.println("Ingrese el lugar de la capacitación");
-        capacitacion.validarLugar(entrada.nextLine());
+        String lugar = capacitacion.validarLugar(entrada.nextLine());
+        capacitacion.setLugar(lugar);
     //Ingreso de la duracion de la capacitacion
         System.out.println("Ingrese la duración");
-        capacitacion.validarDuracion(entrada.nextLine());
+        String duracion = capacitacion.validarDuracion(entrada.nextLine());
+        capacitacion.setDuracion(duracion);
 //ingreso de la cantidad de asistentes
         System.out.println("Ingrese cantidad asistentes");
-        capacitacion.validarAsistentes((entrada.nextInt()));
-
-
+        int asistentes = capacitacion.validarAsistentes((entrada.nextInt()));
+        capacitacion.setCantidadAsistentes(asistentes);
+        this.addCapacitacion(capacitacion);
 }
+
 
 }
 

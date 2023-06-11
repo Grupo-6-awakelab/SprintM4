@@ -1,4 +1,3 @@
-import capacitacion.Capacitacion;
 import usuario.Cliente;
 import usuario.SistemaSalud;
 import usuario.Usuario;
@@ -24,7 +23,7 @@ public class Menu {
                     break;
                 }
                 case 2: {
-                    contenedor.almacenarCapacitacon();
+                    contenedor.almacenarCapacitacion();
                     break;
                 }
                 case 3: {
