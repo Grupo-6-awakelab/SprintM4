@@ -6,12 +6,30 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Revision {
-
-    public Revision(int id, String nombreRevision, String detalle) {
+    public Revision(int id, int idVisita, String nombreRevision, String detalle, String eRevision) {
         this.id = id;
+        this.idVisita = idVisita;
         this.nombreRevision = nombreRevision;
         this.detalle = detalle;
+        this.eRevision = eRevision;
     }
+
+    @Override
+    public String toString() {
+        return "Revision{" +
+                "id=" + id +
+                ", idVisita=" + idVisita +
+                ", nombreRevision='" + nombreRevision + '\'' +
+                ", detalle='" + detalle + '\'' +
+                ", eRevision='" + eRevision + '\'' +
+                '}';
+    }
+
+    private int id;
+    private int idVisita;
+    private String nombreRevision;
+    private String detalle;
+    private String eRevision;
 
     public int getId() {
         return id;
@@ -19,6 +37,14 @@ public class Revision {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getIdVisita() {
+        return idVisita;
+    }
+
+    public void setIdVisita(int idVisita) {
+        this.idVisita = idVisita;
     }
 
     public String getNombreRevision() {
@@ -37,20 +63,21 @@ public class Revision {
         this.detalle = detalle;
     }
 
-    @Override
-    public String toString() {
-        return "Revision{" +
-                "id=" + id +
-                ", nombreRevision='" + nombreRevision + '\'' +
-                ", detalle='" + detalle + '\'' +
-                '}';
+    public String geteRevision() {
+        return eRevision;
     }
 
-    private int id;
-    private String nombreRevision;
-    private String detalle;
+    public void seteRevision(String eRevision) {
+        this.eRevision = eRevision;
+    }
+
+
 
     public void solicitarDatos(Scanner scanner) {
+        System.out.println("Ingrese ID");
+        setId(scanner.nextInt());
+        System.out.println("Ingrese ID Visita");
+        setIdVisita(scanner.nextInt());
         System.out.println("Ingrese nombre de la revision");
         setNombreRevision(validarNomRevision(scanner.nextLine()));
         System.out.println("Ingrese el detalle de la revision");
