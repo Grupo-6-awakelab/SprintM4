@@ -190,6 +190,7 @@ public class Contenedor {
     public void almacenarCapacitacion() {
 
         Capacitacion capacitacion = new Capacitacion();
+        capacitacion.setId(capacitacion.id());
         System.out.println("Ingrese su run");
         Scanner entrada = new Scanner(System.in);
         int run = entrada.nextInt();

@@ -73,7 +73,7 @@ public class Usuario implements IAsesoria {
         fechaNacimiento = null;
         System.out.println("Escriba su Fecha de nacimiento: (dd/MM/yyyy)");
         fechaNacimiento = validarFecha(scanner.nextLine());
-        System.out.println(fechaNacimiento);
+        //System.out.println(fechaNacimiento);
 
     }
 

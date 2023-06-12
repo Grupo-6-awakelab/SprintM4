@@ -100,7 +100,7 @@ public class Capacitacion {
         return Arrays.asList(diasValidos).contains(dia.toLowerCase());
     }
 
-    private int id() {
+    public int id() {
         return (int) (Math.random() * 8999999) + 1000000;
     }
 
