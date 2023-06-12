@@ -13,6 +13,8 @@ import java.util.Scanner;
  */
 
 public class Cliente extends Usuario {
+
+    Scanner scanner = new Scanner(System.in);
     private String apellidos;
     private String telefono;
     private String afp;
@@ -272,9 +274,7 @@ public class Cliente extends Usuario {
     public String validarAfp(String s) {
         if (s.length() < 4 || s.length() > 30) {
             System.out.println("Lo ingresado debe estar entre 4 y 30 caracteres. Intente nuevamente.");
-            Scanner scanner = new Scanner(System.in);
             s = validarAfp(scanner.nextLine());
-
         }
         return s;
     }
