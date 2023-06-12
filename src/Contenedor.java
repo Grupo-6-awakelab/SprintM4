@@ -216,7 +216,7 @@ public class Contenedor {
         }
 
         System.out.println("ingrese el dia de la capacitacion, en minúscula");
-        entrada.nextLine();
+       // entrada.nextLine();
         String dia = entrada.nextLine();
         boolean valid = false;
         while (!valid) {
