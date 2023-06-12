@@ -73,23 +73,19 @@ public class Usuario implements IAsesoria {
         fechaNacimiento = null;
         System.out.println("Escriba su Fecha de nacimiento: (dd/MM/yyyy)");
         fechaNacimiento = validarFecha(scanner.nextLine());
-        System.out.println(fechaNacimiento);
+
 
     }
 
     public String validarNombre(String s) {
-        boolean valid = false;
-        while (!valid) {
-            if (s.length() >= 10 && s.length() <= 50) {
-                valid = true;
-            } else {
-                System.out.println("El nombre contiene errores. Debe tener entre 10 y 50 caracteres.");
-                System.out.println("Por favor, ingrese un nuevo nombre:");
-                Scanner scanner = new Scanner(System.in);
-                s = validarNombre(scanner.nextLine());
-                return s;
-            }
+
+        if (s.length() < 10 || s.length() > 50){
+            System.out.println("El nombre contiene errores. Debe tener entre 10 y 50 caracteres.");
+            System.out.println("Por favor, ingrese un nuevo nombre:");
+            Scanner scanner = new Scanner(System.in);
+            s = validarNombre(scanner.nextLine());
         }
+
         return s;
     }
 
