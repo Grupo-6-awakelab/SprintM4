@@ -18,10 +18,10 @@ public class Contenedor {
     }
 
 
-
     public void adduser(IAsesoria usuario) {
         usuarios.add(usuario);
     }
+
     public void addCapacitacion(Capacitacion capacitacion) {
         this.capacitaciones.add(capacitacion);
     }
@@ -41,7 +41,10 @@ public class Contenedor {
         if (usuario != null) {
             usuario.solicitarDatos(scanner);
             usuarios.add(usuario);
-            usuario.analizarUsuario();
+            if (usuario instanceof Cliente) {
+                Cliente c = (Cliente) usuario;
+                c.contarVisitasTerreno();
+            }
         } else {
             System.out.println("Opción no válida");
         }
@@ -55,8 +58,13 @@ public class Contenedor {
                 return "usuario.Profesional";
             case 3:
                 return "usuario.Administrativo";
-            default:
-                return null;
+            default: {
+                System.out.println("Opcion incorrecta elija nuevamente");
+                almacenarUsuario();
+
+
+            }
+            return null;
         }
     }
 
@@ -167,10 +175,8 @@ public class Contenedor {
 
     public void listarCapacitaciones() {
         for (Capacitacion capacitacion : capacitaciones) {
-            System.out.println("El id de la capacitacion es: " + capacitacion.getId() + "\nesta asociada al run de cliente: " +
-                    capacitacion.getCliente().getRun() + "\nEsta sera el dia: " + capacitacion.getDia() + "\na las: " + capacitacion.getHora() + "\nen: "
-                    + capacitacion.getLugar() + "\ny esta durará: " + capacitacion.getDuracion() + " minutos." + "\ny tiene " + capacitacion.getCantidadAsistentes() + " asistentes.\n");
-
+            capacitacion.mostrarDetalles();
+            System.out.println("-------------------- Datos Cliente asociado a la capacitacion -------------------");
             System.out.println("Los datos del cliente son: " + "\nNombre del cliente: " + capacitacion.getCliente().getNombre() + " " +
                     capacitacion.getCliente().getApellidos() + "\nTelefono: " + capacitacion.getCliente().getTelefono() + "\nAFP: "
                     + capacitacion.getCliente().getAfp() + "\nSistema de salud: " + capacitacion.getCliente().obtenerSistemaDeSalud() + "\nDireccion: "
@@ -186,23 +192,30 @@ public class Contenedor {
         Capacitacion capacitacion = new Capacitacion();
         System.out.println("Ingrese su run");
         Scanner entrada = new Scanner(System.in);
-        Cliente clienteAsignado = null;
         int run = entrada.nextInt();
+        boolean clienteEncontrado = false;
         entrada.nextLine();
-        for (IAsesoria usuario : usuarios) {
-            if (usuario instanceof Cliente) {
-                Cliente c = (Cliente) usuario;
-                if (c.getRun() == run) {
-                    clienteAsignado = c;
-                } else {
-                    System.out.println("error, ingrese nuevamente");
-                    run = entrada.nextInt();
+
+        while (!clienteEncontrado) {
+            for (IAsesoria usuario : usuarios) {
+                if (usuario instanceof Cliente) {
+                    Cliente c = (Cliente) usuario;
+                    if (c.getRun() == run) {
+                        clienteEncontrado = true;
+                        capacitacion.setCliente(c);
+                        break;
+                    }
                 }
+
+            }
+            if (!clienteEncontrado) {
+                System.out.println("No se encontro un cliente con el rut indicado, ingrese nuevamente");
+                run = entrada.nextInt();
             }
         }
-        capacitacion.setCliente(clienteAsignado);
+
         System.out.println("ingrese el dia de la capacitacion, en minúscula");
-     //   entrada.nextLine();
+        entrada.nextLine();
         String dia = entrada.nextLine();
         boolean valid = false;
         while (!valid) {
@@ -220,7 +233,7 @@ public class Contenedor {
         }
         capacitacion.setDia(dia);
         //Ingreso y validacion de hora
-       System.out.println("Ingrese la Hora");
+        System.out.println("Ingrese la Hora");
         String hora = entrada.nextLine();
         valid = false;
         while (!valid) {
@@ -241,7 +254,7 @@ public class Contenedor {
         System.out.println("Ingrese el lugar de la capacitación");
         String lugar = capacitacion.validarLugar(entrada.nextLine());
         capacitacion.setLugar(lugar);
-    //Ingreso de la duracion de la capacitacion
+        //Ingreso de la duracion de la capacitacion
         System.out.println("Ingrese la duración");
         String duracion = capacitacion.validarDuracion(entrada.nextLine());
         capacitacion.setDuracion(duracion);
@@ -250,7 +263,7 @@ public class Contenedor {
         int asistentes = capacitacion.validarAsistentes((entrada.nextInt()));
         capacitacion.setCantidadAsistentes(asistentes);
         this.addCapacitacion(capacitacion);
-}
+    }
 
 
 }

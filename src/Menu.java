@@ -11,8 +11,8 @@ public class Menu {
 
     public void orquestaMenu() {
         int op;
-        Usuario cliente1 = new Cliente("Luis", LocalDate.of(1986, 3, 7), 123, "987654321","adaadad","adada", SistemaSalud.FONASA,"adada","adada",123);
-        contenedor.adduser(cliente1);
+       // Usuario cliente1 = new Cliente("Luis", LocalDate.of(1986, 3, 7), 123, "987654321","adaadad","adada", SistemaSalud.FONASA,"adada","adada",123);
+        //contenedor.adduser(cliente1);
         do {
             muestraMenu();
             System.out.println("Selecciona la opción del menú: ");

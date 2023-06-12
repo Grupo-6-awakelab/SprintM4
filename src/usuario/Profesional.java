@@ -65,7 +65,7 @@ public class Profesional extends Usuario {
     @Override
     public void analizarUsuario() {
         super.analizarUsuario();
-        System.out.println("su titulo es: " + getTitulo() + ", y su fecha de ingreso fue: " + getFechaIngreso());
+        System.out.println("su titulo es: " + titulo + ", y su fecha de ingreso fue: " + fechaIngreso);
     }
 
     public String validarTitulo(String titulo){
