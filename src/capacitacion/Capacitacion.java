@@ -3,12 +3,16 @@ package capacitacion;
 import usuario.Cliente;
 
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
-import java.util.List;
+
 import java.util.Scanner;
 
+/**
+ * Objeto que representa una capacitacion dirigida a un usuario tipo cliente,
+ * en una fecha y lugar determinado.
+ */
 public class Capacitacion {
     private int id;
     private Cliente cliente;
@@ -22,8 +26,7 @@ public class Capacitacion {
     public Capacitacion() {
 
     }
-    private Capacitacion(Scanner scanner) {
-    }
+
 
     public Capacitacion(Cliente cliente, String dia, String hora, String lugar, String duracion, int cantidadAsistentes) {
         this.id = id();
@@ -93,20 +96,34 @@ public class Capacitacion {
     }
 
 
-
-
+    /**
+     * Metodo que se usa para validar el dia ingresado, y que este este en el arreglo.
+     *
+     * @param dia dia de la capacitación
+     * @return boolean
+     */
     public boolean diavalido(String dia) {
         String[] diasValidos = {"lunes", "martes", "miercoles", "jueves", "viernes", "sabado", "domingo"};
         return Arrays.asList(diasValidos).contains(dia.toLowerCase());
     }
 
+    /**
+     * Metodo que genera un id random para una capacitación
+     *
+     * @return un id random
+     */
     public int id() {
         return (int) (Math.random() * 8999999) + 1000000;
     }
 
-
+    /**
+     * Validador de cantidad de caracteres para lugar de la capacitación.
+     *
+     * @param l lugar de la capacitación
+     * @return el lugar si tiene 10 o mas y menor a 50 caracteres.
+     */
     public String validarLugar(String l) {
-        boolean valid = false;
+
         if (l.length() < 9 || l.length() > 50) {
             System.out.println("El lugar contiene errores. Debe tener entre 10 y 50 caracteres.");
             System.out.println("Por favor, ingrese nuevamente el lugar:");
@@ -117,6 +134,12 @@ public class Capacitacion {
 
     }
 
+    /**
+     * Validador de caracteres para la duracion de la capacitacion.
+     *
+     * @param d duracion de la capacitacioón.
+     * @return la duracion siempre que sea menor o igual a 70 caracteres.
+     */
     public String validarDuracion(String d) {
         if (d.length() > 70) {
             System.out.println("el texto ingresado no debe superar los 70 caracteres, ingrese nuevamente");
@@ -125,6 +148,12 @@ public class Capacitacion {
         return d;
     }
 
+    /**
+     * Validador de cantidad de asistentes para una capacitación.
+     *
+     * @param a cantidad de asistentes.
+     * @return si es menor o igual a 1000 retorna el valor.
+     */
     public int validarAsistentes(int a) {
         if (a > 1000) {
             System.out.println("No debe superar los 1000 asistentes. Intente nuevamente.");
@@ -133,24 +162,33 @@ public class Capacitacion {
         return a;
     }
 
+    /**
+     * Funcion para mostrar detalles de una capacitación..
+     */
     public void mostrarDetalles() {
         System.out.println("El id de la capacitacion es: " + id + "\nesta asociada al run de cliente: " +
                 getCliente().getRun() + "\nEsta sera el dia: " + dia + "\na las: " + hora + "\nen: "
-                + lugar + "\ny esta durará: " + duracion + " minutos." + "\ny tiene " + cantidadAsistentes + " asistentes.\n");
-
+                + lugar + "\nesta durará: " + duracion + " minutos." + "\ny tiene " + cantidadAsistentes + " asistentes.\n");
 
     }
 
 
+    /**
+     * Funcion para validar una hora ingresada con un formato en especifico HH:mm (H = Hora m = Minutos)
+     * @param hora recibe una hora.
+     * @return
+     */
     public boolean horaValida(String hora) {
-        DateTimeFormatter horaFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
         try {
-            LocalTime.parse(hora, horaFormatter);
+            LocalTime localTime = LocalTime.parse(hora);
             return true;
         } catch (DateTimeParseException e) {
-            return false;
-        }
+            System.out.println("La hora no debe ser entre 00:00 a 23:59, ingrese nuevamente");
+            horaValida(new Scanner(System.in).nextLine());
 
+        }
+        return true;
     }
 
     @Override

@@ -3,10 +3,14 @@ package usuario;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * Clase que representa un usuario de tipo Administrativo.
+ */
+
 public class Administrativo extends Usuario {
     private String area;
     private String experienciaPrevia;
-    private String s;
+
 
     public Administrativo() {
     }
@@ -39,8 +43,11 @@ public class Administrativo extends Usuario {
     }
 
 
-
-
+    /**
+     * Metodo que solicita datos via scanner para ser guardados en el usuario.
+     *
+     * @param scanner
+     */
     @Override
     public void solicitarDatos(Scanner scanner) {
         System.out.println("Escriba su nombre: ");
@@ -51,36 +58,48 @@ public class Administrativo extends Usuario {
         System.out.println("Escriba su experiencia previa:");
         setExperienciaPrevia(validarExperiencia(scanner.nextLine()));
     }
+
+    /**
+     * Metodo que analiza el usuario entregando datos de relevancia.
+     */
+    @Override
+    public void analizarUsuario() {
+        super.analizarUsuario();
+        System.out.println("su área es: " + area + ", y su experiencia previa: " + experienciaPrevia);
+    }
+
+    /**
+     * Validador de largo de atribulo area
+     *
+     * @param s area del administrador
+     * @return el aria si es valida
+     */
+    public String validarArea(String s) {
+        if (s.length() < 5 || s.length() > 20) {
+            System.out.println("El area ingresado debe contener entre 5 y 20 caracteres");
+            s = validarArea(new Scanner(System.in).nextLine());
+        }
+        return s;
+    }
+
+    /**
+     * valida largo de experiencia ingresada a maximo 100 caracteres
+     * @param s experiencia
+     * @return experiencia
+     */
+    public String validarExperiencia(String s) {
+        if (s.length() > 100) {
+            System.out.println("La experiencia ingresada debe contener maximo 100 caracteres1");
+            s = validarArea(new Scanner(System.in).nextLine());
+        }
+        return s;
+    }
+
     @Override
     public String toString() {
         return "Administrativo{" +
                 "area='" + area + '\'' +
                 ", experienciaPrevia='" + experienciaPrevia + '\'' +
                 '}';
-    }
-
-        @Override
-        public void analizarUsuario() {
-            super.analizarUsuario();
-            System.out.println("su área es: " + area + ", y su experiencia previa: " + experienciaPrevia);
-        }
-
-        public String validarArea(String area){
-            do {
-                if (area.length() < 5 || area.length() > 20) {
-                    System.out.println("Debe ingresar entre 5 y 20 caracteres. Intente nuevamente.");
-                }
-            } while (area.length() < 5 || area.length() > 20);
-            this.area = area;
-            return area;
-    }
-          public String validarExperiencia(String s) {
-            do {
-                if (s.length() > 100) {
-                System.out.println("Largo máximo de caracteres (100) superado, ingrese menos caracteres.");
-                }
-            } while (s.length() > 100);
-            this.s = s;
-            return s;
     }
 }

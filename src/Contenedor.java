@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Clase contenedora de funciones y listas de usuario y capacitaciones
+ */
 public class Contenedor {
     private List<IAsesoria> usuarios;
     private List<Capacitacion> capacitaciones;
@@ -26,6 +29,9 @@ public class Contenedor {
         this.capacitaciones.add(capacitacion);
     }
 
+    /**
+     * Funcion que sirve para almacenar a los usuarios.
+     */
     public void almacenarUsuario() {
         System.out.println("================================================================");
         System.out.println("1. Cliente");
@@ -50,6 +56,11 @@ public class Contenedor {
         }
     }
 
+    /**
+     * metodo para obtener nombre clase del usuario
+     * @param op opcion
+     * @return nombre de la clas.
+     */
     public String obtenerNombreClase(int op) {
         switch (op) {
             case 1:
@@ -68,6 +79,12 @@ public class Contenedor {
         }
     }
 
+    /**
+     * Reflexion usada para crear al usuario.
+     * @param op opcion para obtener clase del usurio
+     * @param scanner para buscar al constructor.
+     * @return
+     */
     public Usuario crearUsuario(int op, Scanner scanner) {
         try {
             Class<?> usuarioClass = Class.forName(obtenerNombreClase(op));
@@ -81,15 +98,11 @@ public class Contenedor {
     }
 
 
-    private static boolean esDiaValido(String dia) {
-        String[] diasValidos = {"lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"};
-        for (String diaValido : diasValidos) {
-            if (dia.equalsIgnoreCase(diaValido)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    /**
+     * metodo para listar usuarios por tipo
+     * @param c la clase
+     * @param i numero de usuario
+     */
 
     public void listarporTipo(Class c, int i) {
         for (IAsesoria usuario : usuarios) {
@@ -117,10 +130,10 @@ public class Contenedor {
                 listarporTipo(Cliente.class, i);
                 break;
             case 2:
-                listarporTipo(Administrativo.class, i);
+                listarporTipo(Profesional.class, i);
                 break;
             case 3:
-                listarporTipo(Profesional.class, i);
+                listarporTipo(Administrativo.class, i);
                 break;
 
             default:
@@ -176,7 +189,7 @@ public class Contenedor {
     public void listarCapacitaciones() {
         for (Capacitacion capacitacion : capacitaciones) {
             capacitacion.mostrarDetalles();
-            System.out.println("-------------------- Datos Cliente asociado a la capacitacion -------------------");
+            System.out.println("-------------------- Datos Cliente asociado a la capacitacion " + capacitacion.getId() + " -------------------");
             System.out.println("Los datos del cliente son: " + "\nNombre del cliente: " + capacitacion.getCliente().getNombre() + " " +
                     capacitacion.getCliente().getApellidos() + "\nTelefono: " + capacitacion.getCliente().getTelefono() + "\nAFP: "
                     + capacitacion.getCliente().getAfp() + "\nSistema de salud: " + capacitacion.getCliente().obtenerSistemaDeSalud() + "\nDireccion: "
@@ -187,6 +200,9 @@ public class Contenedor {
         }
     }
 
+    /**
+     * Metodo que almacena las capacitaciones en una lista solicitando datos por consola.
+     */
     public void almacenarCapacitacion() {
 
         Capacitacion capacitacion = new Capacitacion();
@@ -215,8 +231,7 @@ public class Contenedor {
             }
         }
 
-        System.out.println("ingrese el dia de la capacitacion, en minúscula");
-        entrada.nextLine();
+        System.out.println("ingrese el dia de la capacitacion");
         String dia = entrada.nextLine();
         boolean valid = false;
         while (!valid) {
@@ -259,7 +274,7 @@ public class Contenedor {
         System.out.println("Ingrese la duración");
         String duracion = capacitacion.validarDuracion(entrada.nextLine());
         capacitacion.setDuracion(duracion);
-//ingreso de la cantidad de asistentes
+        //ingreso de la cantidad de asistentes
         System.out.println("Ingrese cantidad asistentes");
         int asistentes = capacitacion.validarAsistentes((entrada.nextInt()));
         capacitacion.setCantidadAsistentes(asistentes);

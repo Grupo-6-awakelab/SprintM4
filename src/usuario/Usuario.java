@@ -11,7 +11,7 @@ public class Usuario implements IAsesoria {
     private String nombre;
     private LocalDate fechaNacimiento;
     private int run;
-    private DateTimeFormatter fechaFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    DateTimeFormatter fechaFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 
     public Usuario(){

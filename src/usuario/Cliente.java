@@ -8,6 +8,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Clase que representa usuario tipo cliente.
+ */
+
 public class Cliente extends Usuario {
     private String apellidos;
     private String telefono;
@@ -133,6 +137,10 @@ public class Cliente extends Usuario {
         this.sistemaSalud = sistemaSalud;
     }
 
+    /**
+     * Metodo que nos sirve para obtener el sistema de salud del cliente.
+     * @return el sistema de salud.
+     */
     public String obtenerSistemaDeSalud() {
 
         switch (sistemaSalud.ordinal() + 1) {
@@ -148,18 +156,23 @@ public class Cliente extends Usuario {
         return null;
     }
 
+    /**
+     * Valida si el cliente tiene visitas a terreno.
+     */
+    public void contarVisitasTerreno() {
+        if (visitaTerrenos != null) {
 
-    public void contarVisitasTerreno(){
-        if(visitaTerrenos !=null){
-
-        }else{
+        } else {
             System.out.println("El cliente no registra visitas a terreno - debes agregar al menos una, puedes hacerlo despues");
         }
     }
+
+    /**
+     * Metodo que se usa para seter datos del cliente.
+     * @param scanner
+     */
     @Override
     public void solicitarDatos(Scanner scanner) {
-
-
         System.out.println("Escriba su nombre: ");
         setNombre(validarNombre(scanner.nextLine()));
         System.out.println("Escriba sus apellidos: ");
@@ -167,13 +180,12 @@ public class Cliente extends Usuario {
         super.solicitarDatos(scanner);
         System.out.println("Escriba su telefono: ");
         setTelefono(validarTelefono(scanner.nextLine()));
-        System.out.println("Escriba su afp; ");
+        System.out.println("Escriba su afp: ");
         setAfp(validarAfp(scanner.nextLine()));
-       // System.out.printf(afp);
+
         boolean sistemaValido = false;
 
         while (!sistemaValido) {
-            scanner.nextLine();
             System.out.println("Escriba su sistema de salud (Fonasa o Isapre):");
             String sistema = scanner.nextLine();
             sistema = sistema.toUpperCase();
@@ -188,12 +200,15 @@ public class Cliente extends Usuario {
 
         System.out.println("Escriba su dirección: ");
         setDireccion(validarDireccion(scanner.nextLine()));
-        System.out.println("Escriba su comuna; ");
+        System.out.println("Escriba su comuna: ");
         setComuna(validarComuna(scanner.nextLine()));
         System.out.println("Escriba su edad: ");
         setEdad(validarEdad(scanner.nextInt()));
     }
 
+    /**
+     * Metodo que entrega en consola los datos relevantes.
+     */
     @Override
     public void analizarUsuario() {
         super.analizarUsuario();
@@ -218,18 +233,28 @@ public class Cliente extends Usuario {
         return sb.toString();
     }
 
+    /**
+     * Metodo que valida largo del apellido.
+     * @param s apellido
+     * @return apellido
+     */
     public String validarApellido(String s) {
 
-        if (s.length() <5 || s.length() >30){
+        if (s.length() < 5 || s.length() > 30) {
             System.out.println("El apellido contiene errores. Debe tener entre 5 y 30 caracteres.");
             System.out.println("Por favor, ingrese un nuevo nombre:");
             Scanner scanner = new Scanner(System.in);
             s = validarApellido(scanner.nextLine());
 
         }
-       return s;
+        return s;
     }
 
+    /**
+     * Metodo que valida que telefono sea obligatorio
+     * @param fono
+     * @return telefono
+     */
     public String validarTelefono(String fono) {
         if (fono.isEmpty()) {
             System.out.println("El teléfono es obligatorio. Intente nuevamente.");
@@ -239,6 +264,11 @@ public class Cliente extends Usuario {
         return fono;
     }
 
+    /**
+     * metodo que valida largo de afp
+     * @param s afp
+     * @return afp
+     */
     public String validarAfp(String s) {
         if (s.length() < 4 || s.length() > 30) {
             System.out.println("Lo ingresado debe estar entre 4 y 30 caracteres. Intente nuevamente.");
