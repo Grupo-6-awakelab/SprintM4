@@ -5,7 +5,7 @@ import usuario.Cliente;
 public class Accidente {
     private int id;
     private Cliente cliente;
-    private int runCliente = cliente.getRun();
+
     private String dia;
     private String hora;
     private String lugar;
@@ -15,9 +15,9 @@ public class Accidente {
     public Accidente() {
     }
 
-    public Accidente(int id, int runCliente, String dia, String hora, String lugar, String origen, String consecuencia) {
+    public Accidente(int id, Cliente cliente, String dia, String hora, String lugar, String origen, String consecuencia) {
         this.id = id;
-        this.runCliente = runCliente;
+        this.cliente = cliente;
         this.dia = dia;
         this.hora = hora;
         this.lugar = lugar;
@@ -35,9 +35,7 @@ public class Accidente {
 
 
 
-   public int getRunCliente() {
-        return runCliente;
-   }
+
     public String getDia() {
         return dia;
     }
@@ -74,7 +72,7 @@ public class Accidente {
     public String toString() {
         final StringBuffer sb = new StringBuffer("Accidente{");
         sb.append("id=").append(id);
-        sb.append(", runCliente=").append(runCliente);
+        sb.append(", runCliente=").append(cliente.getRun());
         sb.append(", dia='").append(dia).append('\'');
         sb.append(", hora='").append(hora).append('\'');
         sb.append(", lugar='").append(lugar).append('\'');

@@ -1,6 +1,11 @@
 package usuario;
 
+import capacitacion.Accidente;
+import capacitacion.Capacitacion;
+import capacitacion.VisitaTerreno;
+
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 public class Cliente extends Usuario {
@@ -8,7 +13,9 @@ public class Cliente extends Usuario {
     private String telefono;
     private String afp;
 
-
+    private List<Capacitacion> capacitaciones;
+    private List<VisitaTerreno> visitaTerrenos;
+    private List<Accidente> accidentes;
     private SistemaSalud sistemaSalud;
 
     private String direccion;
@@ -24,15 +31,42 @@ public class Cliente extends Usuario {
 
     }
 
-    public Cliente(String nombre, LocalDate fechaNacimiento, int run, String apellidos, String telefono, String afp, SistemaSalud sistemaSalud, String direccion, String comuna, int edad) {
+    public Cliente(String nombre, LocalDate fechaNacimiento, int run, String apellidos, String telefono, String afp, List<Capacitacion> capacitaciones, List<VisitaTerreno> visitaTerrenos, List<Accidente> accidentes, SistemaSalud sistemaSalud, String direccion, String comuna, int edad) {
         super(nombre, fechaNacimiento, run);
         this.apellidos = apellidos;
         this.telefono = telefono;
         this.afp = afp;
+        this.capacitaciones = capacitaciones;
+        this.visitaTerrenos = visitaTerrenos;
+        this.accidentes = accidentes;
         this.sistemaSalud = sistemaSalud;
         this.direccion = direccion;
         this.comuna = comuna;
         this.edad = edad;
+    }
+
+    public List<Accidente> getAccidentes() {
+        return accidentes;
+    }
+
+    public void setAccidentes(List<Accidente> accidentes) {
+        this.accidentes = accidentes;
+    }
+
+    public List<Capacitacion> getCapacitaciones() {
+        return capacitaciones;
+    }
+
+    public void setCapacitaciones(List<Capacitacion> capacitaciones) {
+        this.capacitaciones = capacitaciones;
+    }
+
+    public List<VisitaTerreno> getVisitaTerrenos() {
+        return visitaTerrenos;
+    }
+
+    public void setVisitaTerrenos(List<VisitaTerreno> visitaTerrenos) {
+        this.visitaTerrenos = visitaTerrenos;
     }
 
     public String getApellidos() {
@@ -115,6 +149,13 @@ public class Cliente extends Usuario {
     }
 
 
+    public void contarVisitasTerreno(){
+        if(visitaTerrenos !=null){
+
+        }else{
+            System.out.println("El cliente no registra visitas a terreno - debes agregar al menos una, puedes hacerlo despues");
+        }
+    }
     @Override
     public void solicitarDatos(Scanner scanner) {
 
@@ -128,7 +169,7 @@ public class Cliente extends Usuario {
         setTelefono(validarTelefono(scanner.nextLine()));
         System.out.println("Escriba su afp; ");
         setAfp(validarAfp(scanner.nextLine()));
-
+        System.out.printf(afp);
         boolean sistemaValido = false;
 
         while (!sistemaValido) {
@@ -155,6 +196,9 @@ public class Cliente extends Usuario {
     @Override
     public void analizarUsuario() {
         super.analizarUsuario();
+        System.out.println("Su dreccion es: " + direccion);
+        System.out.println("Su comuna es: " + comuna);
+
 
     }
 
@@ -174,72 +218,68 @@ public class Cliente extends Usuario {
     }
 
     public String validarApellido(String s) {
-        boolean valid = false;
-        while (!valid) {
-            if (s.length() >= 5 && s.length() <= 30) {
-                valid = true;
-            } else {
-                System.out.println("El apellido contiene errores. Debe tener entre 5 y 30 caracteres.");
-                System.out.println("Por favor, ingrese un nuevo nombre:");
-                Scanner scanner = new Scanner(System.in);
-                String apellido = validarNombre(scanner.nextLine());
-                return apellido;
-            }
+
+        if (s.length() <5 || s.length() >30){
+            System.out.println("El apellido contiene errores. Debe tener entre 5 y 30 caracteres.");
+            System.out.println("Por favor, ingrese un nuevo nombre:");
+            Scanner scanner = new Scanner(System.in);
+            s = validarApellido(scanner.nextLine());
+
         }
-        return s;
+       return s;
     }
-    public String validarTelefono(String fono){
-    if (fono.isEmpty()) {
-        System.out.println("El teléfono es obligatorio. Intente nuevamente.");
-        Scanner scanner = new Scanner(System.in);
-        fono = scanner.nextLine();
+
+    public String validarTelefono(String fono) {
+        if (fono.isEmpty()) {
+            System.out.println("El teléfono es obligatorio. Intente nuevamente.");
+            Scanner scanner = new Scanner(System.in);
+            fono = scanner.nextLine();
         }
         return fono;
     }
 
-    public String validarAfp(String afp){
-        if (afp.length() >= 4 && afp.length() <= 30) {
+    public String validarAfp(String s) {
+        if (s.length() < 4 || s.length() > 30) {
             System.out.println("Lo ingresado debe estar entre 4 y 30 caracteres. Intente nuevamente.");
             Scanner scanner = new Scanner(System.in);
-            afp = scanner.nextLine();
+            s = validarAfp(scanner.nextLine());
 
         }
-        return afp;
+        return s;
     }
-    public String validarDireccion(String dir){
-        if (dir.length() >= 70) {
+
+    public String validarDireccion(String dir) {
+        if (dir.length() > 70) {
             System.out.println("No puede ingresar mas de 70 caracteres. Intente nuevamente.");
             Scanner scanner = new Scanner(System.in);
-            dir = scanner.nextLine();
+            dir = validarDireccion(scanner.nextLine());
 
         }
         return dir;
     }
-    public String validarComuna(String comuna){
-        if (comuna.length() >= 50) {
+
+    public String validarComuna(String s) {
+        if (s.length() > 50) {
             System.out.println("No puede ingresar mas de 50 caracteres. Intente nuevamente.");
             Scanner scanner = new Scanner(System.in);
-            comuna = scanner.nextLine();
+            s = validarComuna(scanner.nextLine());
 
         }
-        return comuna;
-    }
-    public int validarEdad(int edad) {
-        boolean valid = false;
-        while (!valid) {
-            if (edad >= 0 && edad <= 150) {
-                valid = true;
-            } else {
-                System.out.println("La edad ingresada no es válida. Debe estar entre 0 y 150 años.");
-                System.out.println("Por favor, ingrese una nueva edad:");
-                Scanner scanner = new Scanner(System.in);
-                edad = scanner.nextInt();
-            }
-        }
-        return edad;
+        return s;
     }
 
+    public int validarEdad(int i) {
+        if (i == 0 || i > 150) {
+            System.out.println("La edad ingresada no es válida. Debe estar entre 0 y 150 años.");
+            System.out.println("Por favor, ingrese una nueva edad:");
+            i = validarEdad(new Scanner(System.in).nextInt());
+
+        }
+        return i;
+    }
 }
+
+
 
 
 
