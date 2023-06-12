@@ -117,11 +117,10 @@ public class Contenedor {
                 listarporTipo(Cliente.class, i);
                 break;
             case 2:
-                listarporTipo(Profesional.class, i);
+                listarporTipo(Administrativo.class, i);
                 break;
             case 3:
-                listarporTipo(Administrativo.class, i);
-
+                listarporTipo(Profesional.class, i);
                 break;
 
             default:
@@ -259,7 +258,7 @@ public class Contenedor {
         System.out.println("Ingrese la duración");
         String duracion = capacitacion.validarDuracion(entrada.nextLine());
         capacitacion.setDuracion(duracion);
-        //ingreso de la cantidad de asistentes
+//ingreso de la cantidad de asistentes
         System.out.println("Ingrese cantidad asistentes");
         int asistentes = capacitacion.validarAsistentes((entrada.nextInt()));
         capacitacion.setCantidadAsistentes(asistentes);
