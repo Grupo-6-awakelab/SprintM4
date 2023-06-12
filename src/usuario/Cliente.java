@@ -169,10 +169,11 @@ public class Cliente extends Usuario {
         setTelefono(validarTelefono(scanner.nextLine()));
         System.out.println("Escriba su afp; ");
         setAfp(validarAfp(scanner.nextLine()));
-        System.out.printf(afp);
+       // System.out.printf(afp);
         boolean sistemaValido = false;
 
         while (!sistemaValido) {
+            scanner.nextLine();
             System.out.println("Escriba su sistema de salud (Fonasa o Isapre):");
             String sistema = scanner.nextLine();
             sistema = sistema.toUpperCase();

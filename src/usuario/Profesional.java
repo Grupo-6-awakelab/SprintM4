@@ -72,6 +72,8 @@ public class Profesional extends Usuario {
         do {
              if (titulo.length() < 10 || titulo.length() > 50) {
                 System.out.println("Debe ingresar entre 10 y 50 caracteres. Intente nuevamente.");
+                 Scanner scanner = new Scanner(System.in);
+                titulo = scanner.nextLine();
             }
         } while (titulo.length() < 10 || titulo.length() > 50);
         this.titulo = titulo;
