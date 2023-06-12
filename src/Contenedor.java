@@ -117,10 +117,10 @@ public class Contenedor {
                 listarporTipo(Cliente.class, i);
                 break;
             case 2:
-                listarporTipo(Administrativo.class, i);
+                listarporTipo(Profesional.class, i);
                 break;
             case 3:
-                listarporTipo(Profesional.class, i);
+                listarporTipo(Administrativo.class, i);
                 break;
 
             default:

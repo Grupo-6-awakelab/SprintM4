@@ -4,14 +4,12 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 
-
-
 public class Profesional extends Usuario {
     private String titulo;
     private String fechaIngreso;
 
 
-    public Profesional(){
+    public Profesional() {
     }
 
     public Profesional(Scanner scanner) {
@@ -53,7 +51,8 @@ public class Profesional extends Usuario {
         fechaIngreso = scanner.nextLine();
 
     }
-        @Override
+
+    @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Profesional{");
         sb.append("titulo='").append(titulo).append('\'');
@@ -68,13 +67,13 @@ public class Profesional extends Usuario {
         System.out.println("su titulo es: " + titulo + ", y su fecha de ingreso fue: " + fechaIngreso);
     }
 
-    public String validarTitulo(String titulo){
-        do {
-             if (titulo.length() < 10 || titulo.length() > 50) {
-                System.out.println("Debe ingresar entre 10 y 50 caracteres. Intente nuevamente.");
-            }
-        } while (titulo.length() < 10 || titulo.length() > 50);
-        this.titulo = titulo;
+    public String validarTitulo(String titulo) {
+
+        if (titulo.length() < 10 || titulo.length() > 50) {
+            System.out.println("Debe ingresar entre 10 y 50 caracteres. Intente nuevamente.");
+            titulo = validarTitulo(new Scanner(System.in).nextLine());
+
+        }
         return titulo;
     }
 }
